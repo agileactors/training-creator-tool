@@ -2,8 +2,8 @@
 In order to run the application locally you have to execute the following queries.
 
 ```
-$ git clone https://github.com/xristos1994/training-app-test.git
-$ cd training-app-test
+$ git https://github.com/agileactors/training-creator-tool
+$ cd training-creator-tool
 $ nvm use
 $ npm install
 $ npm start //run the admin project
