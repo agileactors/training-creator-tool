@@ -20,7 +20,7 @@ const TrainingPage = (props) => {
     type,
     data = {},
     mode = 'live'
-  } = props?.pageContext;
+  } = props.pageContext;
 
   const { navigatePrevious, navigateNext, canGoPrevious, canGoNext } = useKeyboardNavigation(prevSlug, nextSlug);
 

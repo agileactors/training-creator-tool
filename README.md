@@ -97,7 +97,7 @@ It follows the [JAMstack architecture](https://jamstack.org) by using Git as a s
 
 ## Prerequisites
 
-- Minimal Node.js version 14.15.0 **(It works only for verion 14 but it should be fixed)**
+- Minimal Node.js version 14.15.0
 - [Gatsby CLI](https://www.gatsbyjs.com/docs/reference/gatsby-cli/)
 - [Netlify CLI](https://github.com/netlify/cli)
 
