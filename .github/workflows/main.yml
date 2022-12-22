@@ -68,4 +68,5 @@ jobs:
           install_command: npm install
           build_directory: public
           deploy_alias: ${{ steps.list-changed-files.outputs.changedFiles }}
-          node_version: 18
+          # FIXME use node version 18
+          node_version: 14
