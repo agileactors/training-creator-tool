@@ -18,8 +18,11 @@ $ set GATSBY_TRAINING=javascript& npm start
 Regardless the project you have started:
 
 CMS: http://localhost:8000/admin/#/
+
 Some credentials will be needed:
-Production Url: https://training-app-test.netlify.app/
+
+Production Url: https://admin--aa-trainings.netlify.app/
+
 Ask Administrator to send you invitation for accessing the CMS
 
 Project: http://localhost:8000/
