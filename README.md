@@ -11,9 +11,8 @@ $ npm start //run the admin project
 # Linux
 $ GATSBY_TRAINING=<training name> npm start // run a specific training (currently example or javascript)
 
-#Windows
-$ set GATSBY_TRAINING=<training name>
-$ npm start
+# Windows CMD
+$ set GATSBY_TRAINING=javascript& npm start
 ```
 
 Regardless the project you have started:
