@@ -21,7 +21,7 @@ CMS: http://localhost:8000/admin/#/
 
 Some credentials will be needed:
 
-Production Url: https://admin--aa-trainings.netlify.app/
+Production Url: https://aa-trainings.netlify.app/
 
 Ask Administrator to send you invitation for accessing the CMS
 
@@ -50,13 +50,13 @@ If the `__core__.md` file has been changed, then all the projects will be redepl
 If the `__core__.md` file has not been changed, then only the projects whose version file has been changed will be redeployed.
 
 You can access the production application
-Admin: [https://admin--training-app-test.netlify.app/admin/](https://admin--training-app-test.netlify.app/admin/)
+Admin: [https://training-app-test.netlify.app/admin/](https://training-app-test.netlify.app/admin/)
 Specific Training: [https://{{training}}--training-app-test.netlify.app/admin/](https://{{training}}--training-app-test.netlify.app/admin/)
 `{{training}}` can be replaced with the name of each available training
 
 ### Use the application
 If you want to create a new training you have to follow the following steps
-1. Visit [https://admin--training-app-test.netlify.app/admin/#/collections/trainings](https://admin--training-app-test.netlify.app/admin/#/collections/trainings)
+1. Visit [https://training-app-test.netlify.app/admin/#/collections/trainings](https://training-app-test.netlify.app/admin/#/collections/trainings)
 2. Login (If you do not have credentials contact the administrator)
 3. Create a new training
 4. Create a new version **using exactly the same title you used in the training**

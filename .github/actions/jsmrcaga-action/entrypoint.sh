@@ -62,8 +62,8 @@ export NETLIFY_AUTH_TOKEN="$NETLIFY_AUTH_TOKEN"
 
 COMMAND="$NETLIFY_CLI deploy --dir=$BUILD_DIRECTORY --functions=$FUNCTIONS_DIRECTORY --message=\"$INPUT_NETLIFY_DEPLOY_MESSAGE\""
 
-# COMMAND+=" --prod"
-COMMAND+=" --alias admin"
+COMMAND+=" --prod"
+# COMMAND+=" --alias admin"
 
 OUTPUT=$(sh -c "$COMMAND")
 
