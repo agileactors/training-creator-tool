@@ -8,6 +8,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import { IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 import { useKeyboardToggle } from '../../hooks/useKeyboardToggle';
 import { useClickOutside } from '../../hooks/useClickOutside';
 import { M_KEY_CODE } from '../../constants';
@@ -105,15 +106,30 @@ export const SideNavigation = () => {
     setIsOpen(false);
   });
 
+  const closeMenu = (e) => {
+    e.preventDefault();
+    setIsOpen(false);
+  };
+
   return (
     <>
-      <IconButton aria-label="open" id="openMenuButton" className="menu-icon" onClick={() => setIsOpen(true)}>
+      <IconButton
+        aria-label="open"
+        id="openMenuButton"
+        className="menu-icon"
+        onClick={() => {
+          setIsOpen(true);
+        }}
+      >
         <MenuIcon />
       </IconButton>
       <Drawer className="menu-drawer" variant="temporary" open={isOpen} anchor="left">
         <div ref={clickRef}>
           <ListItem button component={Link} to={'/'} key={'/'}>
             <ListItemText primary={'Home'} />
+            <IconButton aria-label="close" onClick={closeMenu}>
+              <CloseIcon />
+            </IconButton>
           </ListItem>
           <Divider />
           <List>
