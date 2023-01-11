@@ -12,10 +12,7 @@ import { useKeyboardToggle } from '../../hooks/useKeyboardToggle';
 import { useClickOutside } from '../../hooks/useClickOutside';
 import { M_KEY_CODE } from '../../constants';
 import { NestedList } from './../NestedList/NestedList';
-
-const slugify = (phrase) => {
-  return phrase.toLowerCase().split(' ').join('-');
-};
+import slugify from '../../../build-utils/slugify/slugify';
 
 const useTrainingDataQuery = () => {
   const trainingToBuild = process.env.GATSBY_TRAINING || 'admin';
