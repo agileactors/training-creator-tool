@@ -2,6 +2,7 @@ const path = require('path');
 const { createFilePath } = require('gatsby-source-filesystem');
 const { fmImagesToRelative } = require('gatsby-remark-relative-images');
 const generateSandbox = require('./build-utils/sandbox/generateSandbox');
+const slugify = require('./build-utils/slugify/slugify');
 
 const getSandboxUrl = (id) => `https://codesandbox.io/s/${id}`;
 
@@ -130,10 +131,6 @@ This training is de-activated or it has no content - 1
       }
     }
   `);
-
-  const slugify = (phrase) => {
-    return phrase.toLowerCase().split(' ').join('-');
-  };
 
   const errors = trainingsQueryResult?.errors;
   const trainings = trainingsQueryResult?.data?.allMarkdownRemark?.edges?.filter((edge) =>
