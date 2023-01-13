@@ -26,6 +26,7 @@ const useTrainingDataQuery = () => {
           node {
             frontmatter {
               title
+              uniqueName
               isActive
               sections {
                 pages {
@@ -55,7 +56,7 @@ const useTrainingDataQuery = () => {
   }
 
   const trainingSections = trainings.find(
-    (training) => training.node?.frontmatter.title === trainingToBuild && training.node?.frontmatter.sections
+    (training) => training.node?.frontmatter.uniqueName === trainingToBuild && training.node?.frontmatter.sections
   )?.node?.frontmatter.sections;
 
   if (!trainingSections) {

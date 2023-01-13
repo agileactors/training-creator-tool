@@ -1,5 +1,6 @@
 ---
-title: example
+uniqueName: example
+title: Example
 isActive: true
 sections:
   - sectionTitle: Test examples

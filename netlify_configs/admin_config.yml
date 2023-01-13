@@ -18,9 +18,12 @@ collections:
     label: Trainings
     label_singular: 'Training'
     folder: content/trainings
-    identifier_field: title
+    identifier_field: uniqueName
     create: true
     fields:
+      - label: Unique Name
+        name: uniqueName
+        widget: string
       - label: Title
         name: title
         widget: string
@@ -28,11 +31,11 @@ collections:
     label: Versions
     label_singular: 'Version'
     folder: content/versions
-    identifier_field: title
+    identifier_field: uniqueName
     create: true
     fields:
-      - label: Title
-        name: title
+      - label: Unique Name
+        name: uniqueName
         widget: string
       - label: release date
         name: releaseDate

@@ -1,5 +1,6 @@
 ---
-title: javascript
+uniqueName: javascript
+title: Javascript
 isActive: true
 sections:
   - sectionTitle: Introduction

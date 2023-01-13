@@ -70,7 +70,7 @@ exports.createPages = async ({ actions, graphql }) => {
   let graphqlFilter = '';
 
   if (trainingToBuild !== 'admin') {
-    graphqlFilter = `(filter: {frontmatter: {title: {eq: "${trainingToBuild}"}}})`;
+    graphqlFilter = `(filter: {frontmatter: {uniqueName: {eq: "${trainingToBuild}"}}})`;
   } else {
     // createPage({
     //   path: '/',
@@ -114,8 +114,9 @@ This training is de-activated or it has no content - 1
             html
             id
             frontmatter {
-              title
+              uniqueName
               isActive
+              title
               sections {
                 pages {
                   body
@@ -325,7 +326,7 @@ This training is de-activated or it has no content - 2
         });
       });
 
-      console.log(`---- CHRISTOS MESSAGE: Training ${training.frontmatter.title} - ${numOfPages} pages`);
+      console.log(`---- CHRISTOS MESSAGE: Training ${training.frontmatter.uniqueName} - ${numOfPages} pages`);
     });
   }
 };
