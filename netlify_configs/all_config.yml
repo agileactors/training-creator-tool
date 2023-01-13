@@ -24,7 +24,7 @@ collections:
     fields:
       - label: Unique Name
         name: uniqueName
-        widget: string
+        widget: hidden
       - label: Title
         name: title
         widget: string
@@ -59,7 +59,7 @@ collections:
     fields:
       - label: Unique Name
         name: uniqueName
-        widget: string
+        widget: hidden
       - label: release date
         name: releaseDate
         widget: date
