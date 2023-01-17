@@ -18,10 +18,13 @@ collections:
     label: Trainings
     label_singular: 'Training'
     folder: content/trainings
-    identifier_field: title
-    filter: {field: "title", value: "${trainingToBuild}"}
+    identifier_field: uniqueName
+    filter: {field: "uniqueName", value: "${trainingToBuild}"}
     create: false
     fields:
+      - label: Unique Name
+        name: uniqueName
+        widget: hidden
       - label: Title
         name: title
         widget: string
@@ -50,13 +53,13 @@ collections:
     label: Versions
     label_singular: 'Version'
     folder: content/versions
-    identifier_field: title
+    identifier_field: uniqueName
     create: false
-    filter: {field: "title", value: "${trainingToBuild}"}
+    filter: {field: "uniqueName", value: "${trainingToBuild}"}
     fields:
-      - label: Title
-        name: title
-        widget: string
+      - label: Unique Name
+        name: uniqueName
+        widget: hidden
       - label: release date
         name: releaseDate
         widget: date

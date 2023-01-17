@@ -13,8 +13,8 @@ export const AaTwoLineLogo = ({ className }) => (
         gradientUnits="userSpaceOnUse"
         gradientTransform="matrix(1.699706, 0, 0, 1.719523, 122.912315, 134.439713)"
       >
-        <stop offset="0" stop-color="#00d9ef"></stop>
-        <stop offset="1" stop-color="#00adc9"></stop>
+        <stop offset="0" stopColor="#00d9ef"></stop>
+        <stop offset="1" stopColor="#00adc9"></stop>
       </linearGradient>
       <linearGradient
         id="b"
@@ -25,8 +25,8 @@ export const AaTwoLineLogo = ({ className }) => (
         gradientUnits="userSpaceOnUse"
         gradientTransform="matrix(1.699706, 0, 0, 1.719523, 122.912315, 134.439713)"
       >
-        <stop offset="0" stop-color="#39f"></stop>
-        <stop offset="1" stop-color="#005ece"></stop>
+        <stop offset="0" stopColor="#39f"></stop>
+        <stop offset="1" stopColor="#005ece"></stop>
       </linearGradient>
     </defs>
     <g fill="#005ece" transform="matrix(1, 0, 0, 1, -35.124245, 223.601501)">

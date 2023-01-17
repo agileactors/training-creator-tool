@@ -2,6 +2,7 @@ const path = require('path');
 const { createFilePath } = require('gatsby-source-filesystem');
 const { fmImagesToRelative } = require('gatsby-remark-relative-images');
 const generateSandbox = require('./build-utils/sandbox/generateSandbox');
+const slugify = require('./build-utils/slugify/slugify');
 
 const getSandboxUrl = (id) => `https://codesandbox.io/s/${id}`;
 
@@ -69,7 +70,7 @@ exports.createPages = async ({ actions, graphql }) => {
   let graphqlFilter = '';
 
   if (trainingToBuild !== 'admin') {
-    graphqlFilter = `(filter: {frontmatter: {title: {eq: "${trainingToBuild}"}}})`;
+    graphqlFilter = `(filter: {frontmatter: {uniqueName: {eq: "${trainingToBuild}"}}})`;
   } else {
     // createPage({
     //   path: '/',
@@ -113,8 +114,9 @@ This training is de-activated or it has no content - 1
             html
             id
             frontmatter {
-              title
+              uniqueName
               isActive
+              title
               sections {
                 pages {
                   body
@@ -130,10 +132,6 @@ This training is de-activated or it has no content - 1
       }
     }
   `);
-
-  const slugify = (phrase) => {
-    return phrase.toLowerCase().split(' ').join('-');
-  };
 
   const errors = trainingsQueryResult?.errors;
   const trainings = trainingsQueryResult?.data?.allMarkdownRemark?.edges?.filter((edge) =>
@@ -328,7 +326,7 @@ This training is de-activated or it has no content - 2
         });
       });
 
-      console.log(`---- CHRISTOS MESSAGE: Training ${training.frontmatter.title} - ${numOfPages} pages`);
+      console.log(`---- CHRISTOS MESSAGE: Training ${training.frontmatter.uniqueName} - ${numOfPages} pages`);
     });
   }
 };
