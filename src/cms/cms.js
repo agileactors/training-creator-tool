@@ -108,16 +108,6 @@ This training is de-activated or it has no content
 
   return (
     <div>
-      <button disabled={currentPage === 0} onClick={() => setCurrentPage((prev) => prev - 1)}>
-        Previous
-      </button>
-
-      <button disabled={currentPage === allPages.length - 1} onClick={() => setCurrentPage((prev) => prev + 1)}>
-        Next
-      </button>
-
-      <hr />
-
       {[allPages[currentPage]].map((page) => (
         <TrainingPage
           key={page.title}
@@ -127,6 +117,16 @@ This training is de-activated or it has no content
           }}
         />
       ))}
+
+      <hr />
+
+      <button disabled={currentPage === 0} onClick={() => setCurrentPage((prev) => prev - 1)}>
+        Previous
+      </button>
+
+      <button disabled={currentPage === allPages.length - 1} onClick={() => setCurrentPage((prev) => prev + 1)}>
+        Next
+      </button>
     </div>
   );
 };
