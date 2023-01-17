@@ -50,23 +50,23 @@ If the `__core__.md` file has been changed, then all the projects will be redepl
 If the `__core__.md` file has not been changed, then only the projects whose version file has been changed will be redeployed.
 
 You can access the production application
-Admin: [https://training-app-test.netlify.app/admin/](https://training-app-test.netlify.app/admin/)
-Specific Training: [https://{{training}}--training-app-test.netlify.app/admin/](https://{{training}}--training-app-test.netlify.app/admin/)
+Admin: [https://aa-trainings.netlify.app/admin/](https://aa-trainings.netlify.app/admin/)
+Specific Training: [https://{{training}}--aa-trainings.netlify.app/admin/](https://{{training}}--aa-trainings.netlify.app/admin/)
 `{{training}}` can be replaced with the name of each available training
 
 ### Use the application
 If you want to create a new training you have to follow the following steps
-1. Visit [https://training-app-test.netlify.app/admin/#/collections/trainings](https://training-app-test.netlify.app/admin/#/collections/trainings)
+1. Visit [https://aa-trainings.netlify.app/admin/#/collections/trainings](https://aa-trainings.netlify.app/admin/#/collections/trainings)
 2. Login (If you do not have credentials contact the administrator)
 3. Create a new training
 4. Create a new version **using exactly the same title you used in the training**
 5. Make sure that your changes are published
 6. Wait for about 10 minutes
-7. Visit [https://{{training-title}}--training-app-test.netlify.app/admin/#/collections/trainings](https://{{training-title}}--training-app-test.netlify.app/admin/#/collections/trainings)
+7. Visit [https://{{training-title}}--aa-trainings.netlify.app/admin/#/collections/trainings](https://{{training-title}}--aa-trainings.netlify.app/admin/#/collections/trainings)
 8. Do whatever changenges you want
 9. Whenever you want you changes to be deployed make a change in the Version collection. Ideally add the current date in the version.
 10. It takes some minutes for your changes to appear in production
-11. Visit [https://{{training-title}}--training-app-test.netlify.app/](https://{{training-title}}--training-app-test.netlify.app/)
+11. Visit [https://{{training-title}}--aa-trainings.netlify.app/](https://{{training-title}}--aa-trainings.netlify.app/)
 12. Button `M` toggles the Menu and `Left` and `Right` arrows navigate you to previous or next page
 
 # Gatsby + Netlify CMS Starter
