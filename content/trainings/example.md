@@ -3,7 +3,7 @@ uniqueName: example
 title: Example
 isActive: true
 sections:
-  - sectionTitle: Test examples
+  - sectionTitle: Test examples1
     isActive: true
     pages:
       - pageTitle: Text style
