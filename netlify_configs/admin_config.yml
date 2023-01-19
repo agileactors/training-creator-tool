@@ -26,9 +26,11 @@ collections:
         widget: string
         pattern: ['^[a-z0-9\-]+$', "Must have only lowercase english letters, numbers and dashes"]
         hint: "A version with exactly the same UNIQUE NAME is needed. Only lowercase english letters, numbers and dashes are allowed."
+        default: ""
       - label: Title
         name: title
         widget: string
+        default: ""
   - name: versions
     label: Versions
     label_singular: 'Version'
@@ -41,9 +43,11 @@ collections:
         widget: string
         pattern: ['^[a-z0-9\-]+$', "Must have only lowercase english letters, numbers and dashes. Only lowercase english letters, numbers and dashes are allowed."]
         hint: "A training with exactly the same UNIQUE NAME is needed"
+        default: ""
       - label: release date
         name: releaseDate
         widget: date
         format: 'HH:mm - MMM Do YY'
         date_format: true
         time_format: true
+        default: ""

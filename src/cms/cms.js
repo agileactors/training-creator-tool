@@ -3,6 +3,7 @@ import CMS from 'netlify-cms-app';
 import uploadcare from 'netlify-cms-media-library-uploadcare';
 import cloudinary from 'netlify-cms-media-library-cloudinary';
 import TrainingPage from '../components/TrainingPage/TrainingPage';
+import slugify from '../../build-utils/slugify/slugify';
 import './cms-utils';
 
 CMS.registerMediaLibrary(uploadcare);
@@ -132,3 +133,59 @@ This training is de-activated or it has no content
 };
 
 CMS.registerPreviewTemplate('trainings', TrainingPreview);
+
+CMS.registerEventListener({
+  name: 'preSave',
+  handler: ({ entry }) => {
+    const entryData = entry.getIn(['data']).toJS();
+
+    // NOTE: If entryData contains a sections key then it means that the whole entry is training collection or we are in admin mode
+    if (!Object.keys(entryData).includes('sections')) {
+      return;
+    }
+
+    const sections = entryData?.sections?.map((section) => {
+      return {
+        title: section.sectionTitle,
+        slugifiedTitle: slugify(section.sectionTitle),
+        pages:
+          section?.pages?.map((page) => {
+            return {
+              title: page.pageTitle,
+              slugifiedTitle: slugify(page.pageTitle)
+            };
+          }) || []
+      };
+    });
+
+    if (!sections?.length) {
+      throw new Error(`There is no section in this training.`);
+    }
+
+    for (const section of sections) {
+      if (!section.slugifiedTitle) {
+        throw new Error(`There is a section with invalid Title.`);
+      }
+
+      if ((sections?.filter((_section) => _section.slugifiedTitle === section.slugifiedTitle) || []).length > 1) {
+        throw new Error(`Section with Title "${section.title}" exists more than one times.`);
+      }
+
+      if (!section?.pages?.length) {
+        throw new Error(`There is no page in section "${section.title}".`);
+      }
+
+      for (const page of section.pages) {
+        if (!page.slugifiedTitle) {
+          throw new Error(`There is a page in section "${section.title}" with invalid Title.`);
+        }
+
+        if (
+          (section?.pages?.filter((_section) => _section.slugifiedTitle === section.slugifiedTitle) || []).length > 1
+        ) {
+          throw new Error(`Page with Title "${page.title}" exists more than one times in section "${section.title}".`);
+        }
+      }
+    }
+  }
+});

@@ -25,9 +25,11 @@ collections:
       - label: Unique Name
         name: uniqueName
         widget: hidden
+        default: ""
       - label: Title
         name: title
         widget: string
+        default: ""
       - label: "Active"
         name: "isActive"
         widget: "boolean"
@@ -44,9 +46,9 @@ collections:
               minimize_collapsed: true,
               widget: list,
               fields: [
-                {label: "Page Title", name: "pageTitle", widget: "string", default: "default page title"},
+                { label: "Page Title", name: "pageTitle", widget: "string", default: "" },
                 { label: "Active", name: "isActive", widget: "boolean", default: true },
-                {label: "Body", name: "body", widget: "markdown" }
+                { label: "Body", name: "body", widget: "markdown",default: "" }
               ]
             }
   - name: versions
@@ -60,10 +62,12 @@ collections:
       - label: Unique Name
         name: uniqueName
         widget: hidden
+        default: ""
       - label: release date
         name: releaseDate
         widget: date
         format: 'HH:mm - MMM Do YY'
         date_format: true
         time_format: true
+        default: ""
 
