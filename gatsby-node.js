@@ -8,7 +8,7 @@ const getSandboxUrl = (id) => `https://codesandbox.io/s/${id}`;
 
 exports.onCreateNode = async ({ node, actions, getNode }) => {
   const { createNodeField } = actions;
-  fmImagesToRelative(node); // convert image paths for gatsby images
+  fmImagesToRelative(node); // convert image paths for gatsby images.
 
   const sandboxLinks = node?.context?.body?.match(/\[?.*\]\(?.*codesandbox-link:\/\/?.*\)/g);
 
