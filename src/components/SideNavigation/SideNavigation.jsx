@@ -67,10 +67,14 @@ const useTrainingDataQuery = () => {
     .filter((section) => section.isActive)
     .map((section, sectionIndex, sections) => {
       // eslint-disable-next-line prettier/prettier
-      const numberOfSectionsWithTheSameTitle = sections.filter(({ sectionTitle }, index) => sectionTitle === section.sectionTitle && index < sectionIndex).length;
+      const numberOfSectionsWithTheSameTitle = sections.filter(
+        ({ sectionTitle }, index) => sectionTitle === section.sectionTitle && index < sectionIndex
+      ).length;
 
       // eslint-disable-next-line prettier/prettier
-      const sectionSlug = slugify(section.sectionTitle) + (numberOfSectionsWithTheSameTitle === 0 ? '' : `-${numberOfSectionsWithTheSameTitle}`);
+      const sectionSlug =
+        slugify(section.sectionTitle) +
+        (numberOfSectionsWithTheSameTitle === 0 ? '' : `-${numberOfSectionsWithTheSameTitle}`);
 
       return {
         title: section.sectionTitle,
@@ -79,10 +83,14 @@ const useTrainingDataQuery = () => {
             ?.filter((page) => page.isActive)
             ?.map((page, pageIndex, pages) => {
               // eslint-disable-next-line prettier/prettier
-              const pagesWithTheSameTitle = pages.filter(({ pageTitle }, index) => pageTitle === page.pageTitle && index < pageIndex).length;
+              const pagesWithTheSameTitle = pages.filter(
+                ({ pageTitle }, index) => pageTitle === page.pageTitle && index < pageIndex
+              ).length;
 
               // eslint-disable-next-line prettier/prettier
-              const pageSlug = `/${sectionSlug}/${slugify(page.pageTitle)}` + (pagesWithTheSameTitle === 0 ? '' : `-${pagesWithTheSameTitle}`);
+              const pageSlug =
+                `/${sectionSlug}/${slugify(page.pageTitle)}` +
+                (pagesWithTheSameTitle === 0 ? '' : `-${pagesWithTheSameTitle}`);
 
               return {
                 title: page.pageTitle,
@@ -104,45 +112,47 @@ export const SideNavigation = () => {
   });
 
   return (
-    <>
-      <IconButton aria-label="open" id="openMenuButton" className="menu-icon" onClick={() => setIsOpen(true)}>
-        <MenuIcon />
-      </IconButton>
-      <Drawer className="menu-drawer" variant="temporary" open={isOpen} anchor="left">
-        <div ref={clickRef}>
-          <ListItem button component={Link} to={'/'} key={'/'}>
-            <ListItemText primary={'Home'} />
-          </ListItem>
-          <Divider />
-          <List>
-            {sections.map((section, index) => {
-              return (
-                <div key={section.title}>
-                  <NestedList label={section.title} defaultOpen={index === 0}>
-                    <List component="div" disablePadding>
-                      {section?.pages?.map((page) => (
-                        <ListItem
-                          button
-                          component={Link}
-                          to={page.slug}
-                          key={page.slug}
-                          sx={{ pl: 4 }}
-                          onClick={() => {
-                            setIsOpen(false);
-                          }}
-                        >
-                          <ListItemText primary={page.title} />
-                        </ListItem>
-                      ))}
-                    </List>
-                  </NestedList>
-                </div>
-              );
-            })}
-          </List>
-        </div>
-      </Drawer>
-    </>
+    sections.length > 0 && (
+      <>
+        <IconButton aria-label="open" id="openMenuButton" className="menu-icon" onClick={() => setIsOpen(true)}>
+          <MenuIcon />
+        </IconButton>
+        <Drawer className="menu-drawer" variant="temporary" open={isOpen} anchor="left">
+          <div ref={clickRef}>
+            <ListItem button component={Link} to={'/'} key={'/'}>
+              <ListItemText primary={'Home'} />
+            </ListItem>
+            <Divider />
+            <List>
+              {sections.map((section, index) => {
+                return (
+                  <div key={section.title}>
+                    <NestedList label={section.title} defaultOpen={index === 0}>
+                      <List component="div" disablePadding>
+                        {section?.pages?.map((page) => (
+                          <ListItem
+                            button
+                            component={Link}
+                            to={page.slug}
+                            key={page.slug}
+                            sx={{ pl: 4 }}
+                            onClick={() => {
+                              setIsOpen(false);
+                            }}
+                          >
+                            <ListItemText primary={page.title} />
+                          </ListItem>
+                        ))}
+                      </List>
+                    </NestedList>
+                  </div>
+                );
+              })}
+            </List>
+          </div>
+        </Drawer>
+      </>
+    )
   );
 };
 

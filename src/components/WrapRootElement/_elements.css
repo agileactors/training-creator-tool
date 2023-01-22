@@ -54,6 +54,7 @@ body * {
 }
 
 .MuiPaper-root.navigation-buttons-container {
+  min-height: 47px;
   position: fixed;
   bottom: 0;
   display: flex;
@@ -71,12 +72,12 @@ body * {
   padding: 0.25rem 0.625rem;
 }
 
-.MuiPaper-root.navigation-buttons-container button:hover{
+.MuiPaper-root.navigation-buttons-container button:hover {
   background-color: var(--navigation-button-hover-bg-color);
   color: var(--navigation-button-hover-color);
 }
 
-.MuiPaper-root.navigation-buttons-container button:disabled{
+.MuiPaper-root.navigation-buttons-container button:disabled {
   background-color: var(--navigation-button-disabled-bg-color);
   color: var(--navigation-button-disabled-color);
 }
@@ -151,8 +152,9 @@ body * {
   margin-bottom: 1rem;
 }
 
-.homepage a, .homepage a:visited {
-  color: var(--homepage-color)
+.homepage a,
+.homepage a:visited {
+  color: var(--homepage-color);
 }
 
 .homepage .main-logo * {
@@ -199,7 +201,8 @@ body * {
   color: var(--menu-drawer-anchor-visited-color);
 }
 
-strong, b {
+strong,
+b {
   font-weight: 700;
 }
 
@@ -284,9 +287,7 @@ table th {
   color: var(--table-header-color);
 }
 
-ul, ol {
+ul,
+ol {
   padding-inline-start: 3rem;
 }
-
-
-

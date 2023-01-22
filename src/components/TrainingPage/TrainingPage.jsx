@@ -39,14 +39,16 @@ const TrainingPage = (props) => {
       <Helmet title={title} />
       {mode === 'live' ? (
         <Paper elevation={4} className="navigation-buttons-container">
-          <NavigationButtons
-            navigatePrevious={navigatePrevious}
-            navigateNext={navigateNext}
-            canGoPrevious={canGoPrevious}
-            canGoNext={canGoNext}
-            currentPage={currentPageIndex}
-            totalPages={numOfPages}
-          />
+          {currentPageIndex !== -1 && (
+            <NavigationButtons
+              navigatePrevious={navigatePrevious}
+              navigateNext={navigateNext}
+              canGoPrevious={canGoPrevious}
+              canGoNext={canGoNext}
+              currentPage={currentPageIndex}
+              totalPages={numOfPages}
+            />
+          )}
         </Paper>
       ) : null}
 

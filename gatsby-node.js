@@ -3,6 +3,7 @@ const { createFilePath } = require('gatsby-source-filesystem');
 const { fmImagesToRelative } = require('gatsby-remark-relative-images');
 const generateSandbox = require('./build-utils/sandbox/generateSandbox');
 const slugify = require('./build-utils/slugify/slugify');
+const _ = require('lodash');
 
 const getSandboxUrl = (id) => `https://codesandbox.io/s/${id}`;
 
@@ -64,6 +65,31 @@ exports.onCreateNode = async ({ node, actions, getNode }) => {
 // --------------------------------------------------------
 
 exports.createPages = async ({ actions, graphql }) => {
+  const availableTrainingsQuery = await graphql(`
+    {
+      allMarkdownRemark(filter: { frontmatter: { isActive: { eq: true } } }) {
+        edges {
+          node {
+            frontmatter {
+              uniqueName
+              isActive
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  const list = availableTrainingsQuery?.data?.allMarkdownRemark?.edges
+    .map(
+      (trainings) =>
+        `
+- [${_.upperFirst(trainings?.node?.frontmatter?.uniqueName)}](https://${
+          trainings?.node?.frontmatter?.uniqueName
+        }--aa-trainings.netlify.app)
+  `
+    )
+    .join(``);
   const { createPage } = actions;
 
   const trainingToBuild = process.env.GATSBY_TRAINING || 'admin';
@@ -87,11 +113,22 @@ exports.createPages = async ({ actions, graphql }) => {
         prevSlug: '',
         nextSlug: '',
         currentPageIndex: -1,
-        body: `
-<div style="text-align: center">
+        body:
+          availableTrainingsQuery?.data?.allMarkdownRemark?.edges.length > 0
+            ? `
+<div>
 
-# Training
+# Available Trainings
 
+${list}
+
+</div>
+        `
+            : `
+<div>
+
+# Trainings
+        
 This training is de-activated or it has no content - 1
 </div>
         `,
@@ -234,7 +271,9 @@ This training is de-activated or it has no content - 2
                         ).length;
 
                         // eslint-disable-next-line prettier/prettier
-                        const pageSlug = `/${sectionSlug}/${slugify(_page.pageTitle)}` + (pagesWithTheSameTitle === 0 ? '' : `-${pagesWithTheSameTitle}`);
+                        const pageSlug =
+                          `/${sectionSlug}/${slugify(_page.pageTitle)}` +
+                          (pagesWithTheSameTitle === 0 ? '' : `-${pagesWithTheSameTitle}`);
 
                         return `- [${_page.pageTitle}](${pageSlug})`;
                       })
