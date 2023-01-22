@@ -18,9 +18,14 @@ collections:
     label: Trainings
     label_singular: 'Training'
     folder: content/trainings
-    identifier_field: title
+    identifier_field: uniqueName
     create: true
     fields:
+      - label: Unique Name
+        name: uniqueName
+        widget: string
+        pattern: ['^[a-z0-9\-]+$', "Must have only lowercase english letters, numbers and dashes"]
+        hint: "A version with exactly the same UNIQUE NAME is needed. Only lowercase english letters, numbers and dashes are allowed."
       - label: Title
         name: title
         widget: string
@@ -28,12 +33,14 @@ collections:
     label: Versions
     label_singular: 'Version'
     folder: content/versions
-    identifier_field: title
+    identifier_field: uniqueName
     create: true
     fields:
-      - label: Title
-        name: title
+      - label: Unique Name
+        name: uniqueName
         widget: string
+        pattern: ['^[a-z0-9\-]+$', "Must have only lowercase english letters, numbers and dashes. Only lowercase english letters, numbers and dashes are allowed."]
+        hint: "A training with exactly the same UNIQUE NAME is needed"
       - label: release date
         name: releaseDate
         widget: date

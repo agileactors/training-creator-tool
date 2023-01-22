@@ -13,10 +13,7 @@ import { useKeyboardToggle } from '../../hooks/useKeyboardToggle';
 import { useClickOutside } from '../../hooks/useClickOutside';
 import { M_KEY_CODE } from '../../constants';
 import { NestedList } from './../NestedList/NestedList';
-
-const slugify = (phrase) => {
-  return phrase.toLowerCase().split(' ').join('-');
-};
+import slugify from '../../../build-utils/slugify/slugify';
 
 const useTrainingDataQuery = () => {
   const trainingToBuild = process.env.GATSBY_TRAINING || 'admin';
@@ -30,6 +27,7 @@ const useTrainingDataQuery = () => {
           node {
             frontmatter {
               title
+              uniqueName
               isActive
               sections {
                 pages {
@@ -59,7 +57,7 @@ const useTrainingDataQuery = () => {
   }
 
   const trainingSections = trainings.find(
-    (training) => training.node?.frontmatter.title === trainingToBuild && training.node?.frontmatter.sections
+    (training) => training.node?.frontmatter.uniqueName === trainingToBuild && training.node?.frontmatter.sections
   )?.node?.frontmatter.sections;
 
   if (!trainingSections) {

@@ -5,12 +5,12 @@ export const AaShortLogo = ({ className }) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110.5 58" className={className}>
     <defs>
       <linearGradient id="a" x1="39.65" x2="2.88" y1="35.4" y2="14.17" gradientUnits="userSpaceOnUse">
-        <stop offset="0" stop-color="#00d9ef" />
-        <stop offset="1" stop-color="#00adc9" />
+        <stop offset="0" stopColor="#00d9ef" />
+        <stop offset="1" stopColor="#00adc9" />
       </linearGradient>
       <linearGradient id="b" x1="97.74" x2="60.92" y1="35.41" y2="14.15" gradientUnits="userSpaceOnUse">
-        <stop offset="0" stop-color="#39f" />
-        <stop offset="1" stop-color="#005ece" />
+        <stop offset="0" stopColor="#39f" />
+        <stop offset="1" stopColor="#005ece" />
       </linearGradient>
     </defs>
     <path
