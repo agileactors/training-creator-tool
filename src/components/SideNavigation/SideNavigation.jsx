@@ -125,7 +125,15 @@ export const SideNavigation = () => {
       </IconButton>
       <Drawer className="menu-drawer" variant="temporary" open={isOpen} anchor="left">
         <div ref={clickRef}>
-          <ListItem button component={Link} to={'/'} key={'/'}>
+          <ListItem
+            button
+            component={Link}
+            to={'/'}
+            key={'/'}
+            onClick={() => {
+              setIsOpen(false);
+            }}
+          >
             <ListItemText primary={'Home'} />
             <IconButton aria-label="close" onClick={closeMenu}>
               <CloseIcon />
