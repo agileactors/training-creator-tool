@@ -3,7 +3,6 @@ const { createFilePath } = require('gatsby-source-filesystem');
 const { fmImagesToRelative } = require('gatsby-remark-relative-images');
 const generateSandbox = require('./build-utils/sandbox/generateSandbox');
 const slugify = require('./build-utils/slugify/slugify');
-const _ = require('lodash');
 
 const getSandboxUrl = (id) => `https://codesandbox.io/s/${id}`;
 
@@ -65,31 +64,6 @@ exports.onCreateNode = async ({ node, actions, getNode }) => {
 // --------------------------------------------------------
 
 exports.createPages = async ({ actions, graphql }) => {
-  const availableTrainingsQuery = await graphql(`
-    {
-      allMarkdownRemark(filter: { frontmatter: { isActive: { eq: true } } }) {
-        edges {
-          node {
-            frontmatter {
-              uniqueName
-              isActive
-            }
-          }
-        }
-      }
-    }
-  `);
-
-  const list = availableTrainingsQuery?.data?.allMarkdownRemark?.edges
-    .map(
-      (trainings) =>
-        `
-- [${_.upperFirst(trainings?.node?.frontmatter?.uniqueName)}](https://${
-          trainings?.node?.frontmatter?.uniqueName
-        }--aa-trainings.netlify.app)
-  `
-    )
-    .join(``);
   const { createPage } = actions;
 
   const trainingToBuild = process.env.GATSBY_TRAINING || 'admin';
@@ -98,40 +72,33 @@ exports.createPages = async ({ actions, graphql }) => {
   if (trainingToBuild !== 'admin') {
     graphqlFilter = `(filter: {frontmatter: {uniqueName: {eq: "${trainingToBuild}"}}})`;
   } else {
-    // createPage({
-    //   path: '/',
-    //   component: path.resolve(`src/components/NoContent/NoContent.jsx`),
-    // });
+    const availableTrainingsQuery = await graphql(`
+      {
+        allMarkdownRemark(filter: { frontmatter: { isActive: { eq: true } } }) {
+          edges {
+            node {
+              frontmatter {
+                title
+                isActive
+              }
+            }
+          }
+        }
+      }
+    `);
 
-    // FIXME We need to create a new Page type which will create this page
+    const listOfTrainings = availableTrainingsQuery?.data?.allMarkdownRemark?.edges;
     createPage({
       path: '/', // FIXME: Check if slug already exists,
       component: path.resolve(`src/components/TrainingPage/TrainingPage.jsx`),
       context: {
         id: 1,
-        title: 'Home page',
+        title: 'Available Trainings',
+        type: 'availableTrainings',
         prevSlug: '',
         nextSlug: '',
         currentPageIndex: -1,
-        body:
-          availableTrainingsQuery?.data?.allMarkdownRemark?.edges.length > 0
-            ? `
-<div>
-
-# Available Trainings
-
-${list}
-
-</div>
-        `
-            : `
-<div>
-
-# Trainings
-        
-This training is de-activated or it has no content - 1
-</div>
-        `,
+        body: listOfTrainings,
         numOfPages: 0,
         trainingsData: []
       }
@@ -269,8 +236,6 @@ This training is de-activated or it has no content - 2
                         const pagesWithTheSameTitle = _pages.filter(
                           ({ pageTitle }, index) => pageTitle === _page.pageTitle && index < _pageIndex
                         ).length;
-
-                        // eslint-disable-next-line prettier/prettier
                         const pageSlug =
                           `/${sectionSlug}/${slugify(_page.pageTitle)}` +
                           (pagesWithTheSameTitle === 0 ? '' : `-${pagesWithTheSameTitle}`);

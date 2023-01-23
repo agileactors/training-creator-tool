@@ -7,6 +7,7 @@ import { SlidePage } from '../SlidePage/SlidePage';
 import { Homepage } from '../Homepage/Homepage';
 
 import { defineCustomElements as deckDeckGoHighlightElement } from '@deckdeckgo/highlight-code/dist/loader';
+import { AvailableTrainings } from '../AvailableTrainings/AvailableTrainings';
 deckDeckGoHighlightElement();
 
 const TrainingPage = (props) => {
@@ -29,6 +30,8 @@ const TrainingPage = (props) => {
       return <SlidePage body={body} />;
     } else if (type === 'homepage') {
       return <Homepage {...data} />;
+    } else if (type === 'availableTrainings') {
+      return <AvailableTrainings body={body} title={title} />;
     } else {
       return <SlidePage body={body} />;
     }
