@@ -183,11 +183,11 @@ body * {
 
 .menu-drawer {
   flex-shrink: 0;
-  width: var(--menu-drawer-width);
 }
 
-.menu-drawer.MuiDrawer-paper {
-  width: var(--menu-drawer-width);
+.menu-drawer .MuiDrawer-paper {
+  max-width: var(--menu-drawer-width);
+  width: 100%;
   box-sizing: border-box;
 }
 
