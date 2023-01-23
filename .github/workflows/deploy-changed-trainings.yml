@@ -1,11 +1,11 @@
-name: 'My Workflow'
+name: 'Deploy Changed Trainings'
 
 on:
    push:
     branches:
       - main
     paths:
-      - '**/versions/**.md'
+      - '**/trainings/**.md'
 
 permissions: write-all
 
@@ -24,39 +24,17 @@ jobs:
         id: list-changed-files
         run: |
           files=""
-          coreChanged="false"
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             dir="$(dirname $file)"
 
-            if [ $dir = "content/versions" ]
+            if [ $dir = "content/trainings" ]
             then
               pureFileName="$(basename -s .md $file)"
-
-              if [ $pureFileName = "__core__" ]
-              then
-                coreChanged="true"
-              fi
 
               files+=$pureFileName
               files+=","
             fi
           done
-
-          if [ $coreChanged = "true" ]
-          then
-            files=""
-
-            for file in "content/versions"/*
-            do
-              pureFileName="$(basename -s .md $file)"
-
-              if [ $pureFileName != "__core__" ]
-              then
-                files+=$pureFileName
-                files+=","
-              fi
-            done
-          fi
 
           echo "---- CHRISTOS MESSAGE: The trainings files are going to be deployed: \"$files\""
 

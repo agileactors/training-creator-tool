@@ -44,10 +44,11 @@ npm install --global --production windows-build-tools
 MacOS and WSL users who might also encounter some errors, check [node-gyp](https://github.com/nodejs/node-gyp) for more info. We recommend using the latest stable node version.
 
 ### Deployment
-Whenever one or more files of the directory `content/versions` has changed and been pushed to master, the deployment process will be triggered.
+Whenever one or more files of the directory `content/trainings` has changed and been pushed to master, the deployment process will be triggered.
 
-If the `__core__.md` file has been changed, then all the projects will be redeployed.
-If the `__core__.md` file has not been changed, then only the projects whose version file has been changed will be redeployed.
+If the any file outside the directory `content/trainings` has been changed, then all the projects will be redeployed.
+
+The action `Deploy All Trainings` can be manually triggered and it will deploy all the projects
 
 You can access the production application
 Admin: [https://aa-trainings.netlify.app/admin/](https://aa-trainings.netlify.app/admin/)
@@ -59,12 +60,11 @@ If you want to create a new training you have to follow the following steps
 1. Visit [https://aa-trainings.netlify.app/admin/#/collections/trainings](https://aa-trainings.netlify.app/admin/#/collections/trainings)
 2. Login (If you do not have credentials contact the administrator)
 3. Create a new training
-4. Create a new version **using exactly the same title you used in the training**
-5. Make sure that your changes are published
-6. Wait for about 10 minutes
-7. Visit [https://{{training-title}}--aa-trainings.netlify.app/admin/#/collections/trainings](https://{{training-title}}--aa-trainings.netlify.app/admin/#/collections/trainings)
-8. Do whatever changenges you want
-9. Whenever you want you changes to be deployed make a change in the Version collection. Ideally add the current date in the version.
+4. Make sure that your changes are published
+5. Wait for about 10 minutes
+6. Visit [https://{{training-title}}--aa-trainings.netlify.app/admin/#/collections/trainings](https://{{training-title}}--aa-trainings.netlify.app/admin/#/collections/trainings)
+7. Do whatever changes you want
+9. Whenever you want you changes to be deployed make a publish the changes in the specific training.
 10. It takes some minutes for your changes to appear in production
 11. Visit [https://{{training-title}}--aa-trainings.netlify.app/](https://{{training-title}}--aa-trainings.netlify.app/)
 12. Button `M` toggles the Menu and `Left` and `Right` arrows navigate you to previous or next page
