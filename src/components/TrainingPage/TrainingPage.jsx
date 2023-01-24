@@ -24,6 +24,7 @@ const TrainingPage = (props) => {
   } = props.pageContext;
 
   const { navigatePrevious, navigateNext, canGoPrevious, canGoNext } = useKeyboardNavigation(prevSlug, nextSlug);
+
   const renderSlide = () => {
     if (type === 'content') {
       return <SlidePage body={body} />;
@@ -36,21 +37,27 @@ const TrainingPage = (props) => {
     }
   };
 
+  const shouldDisplayNavigationBar = () => {
+    if (type === 'availableTrainings' || mode !== 'live') {
+      return false;
+    }
+
+    return true;
+  };
+
   return (
     <>
       <Helmet title={title} />
-      {mode === 'live' ? (
+      {shouldDisplayNavigationBar() ? (
         <Paper elevation={4} className="navigation-buttons-container">
-          {currentPageIndex !== -1 && (
-            <NavigationButtons
-              navigatePrevious={navigatePrevious}
-              navigateNext={navigateNext}
-              canGoPrevious={canGoPrevious}
-              canGoNext={canGoNext}
-              currentPage={currentPageIndex}
-              totalPages={numOfPages}
-            />
-          )}
+          <NavigationButtons
+            navigatePrevious={navigatePrevious}
+            navigateNext={navigateNext}
+            canGoPrevious={canGoPrevious}
+            canGoNext={canGoNext}
+            currentPage={currentPageIndex}
+            totalPages={numOfPages}
+          />
         </Paper>
       ) : null}
 

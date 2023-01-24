@@ -82,7 +82,12 @@ body * {
   color: var(--navigation-button-disabled-color);
 }
 
-.slide-page {
+.available-trainings {
+  --navigation-height: 0px;
+}
+
+.slide-page,
+.available-trainings {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -90,21 +95,24 @@ body * {
   background-color: var(--slide-bg-color);
 }
 
-.slide-page .logo {
+.slide-page .logo,
+.available-trainings .logo {
   position: fixed;
   top: 1vmin;
   right: 3vmin;
   height: 4vmin;
 }
 
-.slide-page .bottom-corner-design {
+.slide-page .bottom-corner-design,
+.available-trainings .bottom-corner-design {
   position: fixed;
   bottom: var(--navigation-height);
   right: 0;
   width: 40%;
 }
 
-.slide-page .bottom-corner-design * {
+.slide-page .bottom-corner-design *,
+.available-trainings .bottom-corner-design * {
   fill: var(--bottom-corner-design-color);
 }
 
