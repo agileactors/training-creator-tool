@@ -68,10 +68,14 @@ const useTrainingDataQuery = () => {
     .filter((section) => section.isActive)
     .map((section, sectionIndex, sections) => {
       // eslint-disable-next-line prettier/prettier
-      const numberOfSectionsWithTheSameTitle = sections.filter(({ sectionTitle }, index) => sectionTitle === section.sectionTitle && index < sectionIndex).length;
+      const numberOfSectionsWithTheSameTitle = sections.filter(
+        ({ sectionTitle }, index) => sectionTitle === section.sectionTitle && index < sectionIndex
+      ).length;
 
       // eslint-disable-next-line prettier/prettier
-      const sectionSlug = slugify(section.sectionTitle) + (numberOfSectionsWithTheSameTitle === 0 ? '' : `-${numberOfSectionsWithTheSameTitle}`);
+      const sectionSlug =
+        slugify(section.sectionTitle) +
+        (numberOfSectionsWithTheSameTitle === 0 ? '' : `-${numberOfSectionsWithTheSameTitle}`);
 
       return {
         title: section.sectionTitle,
@@ -80,10 +84,14 @@ const useTrainingDataQuery = () => {
             ?.filter((page) => page.isActive)
             ?.map((page, pageIndex, pages) => {
               // eslint-disable-next-line prettier/prettier
-              const pagesWithTheSameTitle = pages.filter(({ pageTitle }, index) => pageTitle === page.pageTitle && index < pageIndex).length;
+              const pagesWithTheSameTitle = pages.filter(
+                ({ pageTitle }, index) => pageTitle === page.pageTitle && index < pageIndex
+              ).length;
 
               // eslint-disable-next-line prettier/prettier
-              const pageSlug = `/${sectionSlug}/${slugify(page.pageTitle)}` + (pagesWithTheSameTitle === 0 ? '' : `-${pagesWithTheSameTitle}`);
+              const pageSlug =
+                `/${sectionSlug}/${slugify(page.pageTitle)}` +
+                (pagesWithTheSameTitle === 0 ? '' : `-${pagesWithTheSameTitle}`);
 
               return {
                 title: page.pageTitle,
