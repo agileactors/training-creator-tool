@@ -31,7 +31,8 @@ const TrainingPage = (props) => {
     } else if (type === 'homepage') {
       return <Homepage {...data} />;
     } else if (type === 'availableTrainings') {
-      return <AvailableTrainings body={body} title={title} />;
+      const props = { data, title };
+      return <AvailableTrainings {...props} />;
     } else {
       return <SlidePage body={body} />;
     }

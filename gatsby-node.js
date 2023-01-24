@@ -74,12 +74,15 @@ exports.createPages = async ({ actions, graphql }) => {
   } else {
     const availableTrainingsQuery = await graphql(`
       {
-        allMarkdownRemark(filter: { frontmatter: { isActive: { eq: true } } }) {
+        allMarkdownRemark(
+          sort: { order: ASC, fields: frontmatter___title }
+          filter: { frontmatter: { isActive: { eq: true } } }
+        ) {
           edges {
             node {
               frontmatter {
                 title
-                isActive
+                uniqueName
               }
             }
           }
@@ -87,7 +90,17 @@ exports.createPages = async ({ actions, graphql }) => {
       }
     `);
 
-    const listOfTrainings = availableTrainingsQuery?.data?.allMarkdownRemark?.edges;
+    const listOfTrainings = availableTrainingsQuery?.data?.allMarkdownRemark?.edges.reduce(
+      (trainings, nextValue) => [
+        ...trainings,
+        {
+          title: nextValue.node?.frontmatter?.title,
+          url: `https://${nextValue?.node?.frontmatter?.uniqueName}--aa-trainings.netlify.app`
+        }
+      ],
+      []
+    );
+
     createPage({
       path: '/', // FIXME: Check if slug already exists,
       component: path.resolve(`src/components/TrainingPage/TrainingPage.jsx`),
@@ -98,7 +111,7 @@ exports.createPages = async ({ actions, graphql }) => {
         prevSlug: '',
         nextSlug: '',
         currentPageIndex: -1,
-        body: listOfTrainings,
+        data: { listOfTrainings },
         numOfPages: 0,
         trainingsData: []
       }

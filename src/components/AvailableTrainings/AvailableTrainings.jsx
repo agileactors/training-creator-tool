@@ -3,24 +3,20 @@ import { BottomCornerDesign } from '../../icons/BottomCornerDesign';
 import { Link, Typography } from '@mui/material';
 import { AaShortLogo } from '../../icons/AaShortLogo';
 
-export const AvailableTrainings = (props) => {
-  const title = props.title || 'Training';
+export const AvailableTrainings = ({ title, data }) => {
+  const mainTitle = title || 'Trainings';
+
   return (
     <div className="slide-page">
       <div className="content-slide">
         <AaShortLogo className="logo" />
-        <h1>{title}</h1>
-        {props.body.length > 0 ? (
+        <h1>{mainTitle}</h1>
+        {data.listOfTrainings.length > 0 ? (
           <ul>
-            {props.body.map((training) => (
-              <li key={training.node?.frontmatter?.title}>
-                <Link
-                  target="_blank"
-                  underline="none"
-                  rel="noopener"
-                  href={`https://${training?.node?.frontmatter?.title}--aa-trainings.netlify.app`}
-                >
-                  {training.node?.frontmatter?.title}
+            {data.listOfTrainings.map(({ title, url }) => (
+              <li key={title}>
+                <Link underline="none" rel="noopener" href={url}>
+                  {title}
                 </Link>
               </li>
             ))}
