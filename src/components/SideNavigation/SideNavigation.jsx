@@ -109,13 +109,19 @@ export const SideNavigation = () => {
 
   const clickRef = React.useRef();
   useClickOutside(clickRef, () => {
-    setIsOpen(false);
+    if (sections?.length) {
+      setIsOpen(false);
+    }
   });
 
   const closeMenu = (e) => {
     e.preventDefault();
     setIsOpen(false);
   };
+
+  if (!sections?.length) {
+    return null;
+  }
 
   return (
     <>
