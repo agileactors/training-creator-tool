@@ -79,7 +79,8 @@ const TrainingPreview = ({ entry }) => {
       pages: s?.pages?.map((p) => {
         allPages.push({
           ...p,
-          title: p.pageTitle
+          title: p.pageTitle,
+          isActive: p.isActive && s.isActive && training.isActive
         });
 
         return {
@@ -108,14 +109,30 @@ This training is de-activated or it has no content
 
   return (
     <div>
-      {[allPages[currentPage]].map((page) => (
-        <TrainingPage
-          key={page.title}
-          pageContext={{
-            body: page.body,
-            mode: 'preview'
-          }}
-        />
+      {[allPages[currentPage]]?.map((page) => (
+        <>
+          {!page.isActive && typeof page.isActive === 'boolean' ? (
+            <div
+              style={{
+                position: 'fixed',
+                top: '1rem',
+                left: '1rem',
+                backgroundColor: 'red',
+                color: 'white',
+                padding: '0.5rem'
+              }}
+            >
+              Not Active
+            </div>
+          ) : null}
+          <TrainingPage
+            key={page.title}
+            pageContext={{
+              body: page.body,
+              mode: 'preview'
+            }}
+          />
+        </>
       ))}
 
       <hr />

@@ -24,26 +24,27 @@ collections:
       - label: Unique Name
         name: uniqueName
         widget: string
-        pattern: ['^[a-z0-9\-]+$', "Must have only lowercase english letters, numbers and dashes"]
-        hint: "A version with exactly the same UNIQUE NAME is needed. Only lowercase english letters, numbers and dashes are allowed."
+        pattern: ['^(?!admin$)[a-z0-9\-]+$', "Must have only lowercase english letters, numbers and dashes. The name 'admin' is not allowed"]
+        hint: "Only lowercase english letters, numbers and dashes are allowed."
+        default: ""
       - label: Title
         name: title
         widget: string
-  - name: versions
-    label: Versions
-    label_singular: 'Version'
-    folder: content/versions
-    identifier_field: uniqueName
-    create: true
-    fields:
-      - label: Unique Name
-        name: uniqueName
-        widget: string
-        pattern: ['^[a-z0-9\-]+$', "Must have only lowercase english letters, numbers and dashes. Only lowercase english letters, numbers and dashes are allowed."]
-        hint: "A training with exactly the same UNIQUE NAME is needed"
-      - label: release date
-        name: releaseDate
-        widget: date
-        format: 'HH:mm - MMM Do YY'
-        date_format: true
-        time_format: true
+        default: ""
+
+# editorial_workflow:
+#   publish_mode: editorial_workflow
+#   roles:
+#     - name: "admin"
+#       label: "Admin"
+#       permissions:
+#         - "publish"
+
+# create: Allows users to create new content in the CMS.
+# read: Allows users to view existing content in the CMS.
+# update: Allows users to edit existing content in the CMS.
+# delete: Allows users to delete existing content in the CMS.
+# publish: Allows users to approve and publish changes to content in the CMS.
+# unpublish: Allows users to unpublish content in the CMS.
+# revert: Allows users to revert changes to content in the CMS.
+# admin: Allows users to access the CMS settings and configurations.
