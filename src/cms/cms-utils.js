@@ -13,112 +13,160 @@ if (typeof window !== 'undefined') {
   document.head.appendChild(style);
 
   const addHelperInfo = () => {
+    const editor = document.querySelector('[class*="-ControlContainer"');
+
+    if (!editor) {
+      return;
+    }
+
+    let trainingName = 'unique-name';
+
+    const uniqueNameInput = document.querySelector('[id^=uniqueName]');
+
+    if (uniqueNameInput) {
+      trainingName = uniqueNameInput.value || 'unique-name';
+
+      if (uniqueNameInput) {
+        uniqueNameInput.addEventListener('input', (event) => {
+          const tempTrainingName = event.target.value || 'unique-name';
+          const adminUrlElement = document.querySelector('#admin-url');
+          const trainingUrlElement = document.querySelector('#training-url');
+
+          if (adminUrlElement) {
+            adminUrlElement.href = `https://${tempTrainingName}--aa-trainings.netlify.app/admin`;
+            adminUrlElement.innerHTML = adminUrlElement.href;
+          }
+
+          if (trainingUrlElement) {
+            trainingUrlElement.href = `https://${tempTrainingName}--aa-trainings.netlify.app/`;
+            trainingUrlElement.innerHTML = trainingUrlElement.href;
+          }
+        });
+      }
+    } else {
+      trainingName = window.location.href.split('/').slice(-1)[0];
+    }
+
+    document.querySelector('.info-element')?.remove();
+
+    // NOTE Add Info about the training
+    const trainingUrl = document.createElement('a');
+    trainingUrl.href = `https://${trainingName}--aa-trainings.netlify.app/`;
+    trainingUrl.target = '_blank';
+    trainingUrl.append(trainingUrl.href);
+    trainingUrl.style = 'color: #0766d5';
+    trainingUrl.id = 'training-url';
+
+    const adminUrl = document.createElement('a');
+    adminUrl.href = `https://${trainingName}--aa-trainings.netlify.app/admin`;
+    adminUrl.target = '_blank';
+    adminUrl.append(adminUrl.href);
+    adminUrl.style = 'color: #0766d5';
+    adminUrl.id = 'admin-url';
+
+    const infoElement = document.createElement('div');
+
+    // eslint-disable-next-line prettier/prettier
+    infoElement.style = 'margin-bottom: 16px; padding: 8px; background-color: #ffff5f; color: #000; border: 2px solid rgb(223, 223, 227); border-radius: 5px';
+    infoElement.className = 'info-element';
+
+    infoElement.append('You will find this training at: ');
+    infoElement.appendChild(trainingUrl);
+
+    infoElement.appendChild(document.createElement('br'));
+
+    infoElement.append('You can edit this training at: ');
+    infoElement.appendChild(adminUrl);
+
+    editor.insertAdjacentElement('afterbegin', infoElement);
+  };
+
+  const addObservers = () => {
     // NOTE: If we are in a training editor, we want to display some info about the training
-    if (window.location.href.includes('collections/trainings/entries/')) {
-      // FIXME This interval is here because the content of the page is not available from the
-      // begining. Check if we could find a way to execute the function when content is ready.
-      const myInterval = setInterval(() => {
-        const editor = document.querySelector('[class*="-ControlContainer"');
+    const location = window.location.href;
+    if (location.includes('collections/trainings/entries/') || location.endsWith('/collections/trainings/new')) {
+      const observer = new MutationObserver(function (mutations_list) {
+        mutations_list.forEach(function () {
+          if (document.querySelector('[class*="-ControlContainer"')) {
+            addHelperInfo();
+            observer.disconnect();
+          }
+        });
+      });
 
-        if (editor) {
-          clearInterval(myInterval);
+      observer.observe(document.querySelector('body'), { subtree: true, childList: true });
+    }
 
-          document.querySelector('.info-element')?.remove();
+    if (window.location.href.endsWith('collections/trainings')) {
+      const observer = new MutationObserver(function (mutations_list) {
+        mutations_list.forEach(function () {
+          if (document.querySelector('[class*="-SidebarHeading"')) {
+            addDocumentationInfo();
+            observer.disconnect();
+          }
+        });
+      });
 
-          // The string after the last slash in the url of an entry is the UNIQUE NAME of the entry.
-          // And we know that the UNIQUE NAME of the entry is going to be used in order to be deployed to the appropriate alias url.
-          const trainingName = window.location.href.split('/').slice(-1)[0];
-
-          // NOTE Add Info about the training
-          const trainingUrl = document.createElement('a');
-          trainingUrl.href = `https://${trainingName}--aa-trainings.netlify.app/`;
-          trainingUrl.target = '_blank';
-          trainingUrl.append(trainingUrl.href);
-          trainingUrl.style = 'color: #0766d5';
-
-          const adminUrl = document.createElement('a');
-          adminUrl.href = `https://${trainingName}--aa-trainings.netlify.app/admin`;
-          adminUrl.target = '_blank';
-          adminUrl.append(adminUrl.href);
-          adminUrl.style = 'color: #0766d5';
-
-          const infoElement = document.createElement('div');
-
-          // eslint-disable-next-line prettier/prettier
-          infoElement.style = 'margin-bottom: 16px; padding: 8px; background-color: #ffff5f; color: #000; border: 2px solid rgb(223, 223, 227); border-radius: 5px';
-          infoElement.className = 'info-element';
-
-          infoElement.append('You will find this training at: ');
-          infoElement.appendChild(trainingUrl);
-
-          infoElement.appendChild(document.createElement('br'));
-
-          infoElement.append('You can edit this training at: ');
-          infoElement.appendChild(adminUrl);
-
-          editor.insertAdjacentElement('afterbegin', infoElement);
-        }
-      }, 2000);
+      observer.observe(document.querySelector('body'), { subtree: true, childList: true });
     }
   };
 
   const attachEventListenerForPreviewButton = () => {
-    if (window.location.href.includes('collections/trainings/entries/')) {
-      const myInterval = setInterval(() => {
-        const previewButton = document.querySelector('[class*="-EditorToggle"');
+    const location = window.location.href;
 
-        if (previewButton) {
-          clearInterval(myInterval);
-          previewButton.addEventListener('click', onPreviewButtonClick);
-        }
-      }, 2000);
+    if (location.includes('collections/trainings/entries/') || location.endsWith('/collections/trainings/new')) {
+      const observer = new MutationObserver(function (mutations_list) {
+        mutations_list.forEach(function () {
+          const previewButton = document.querySelector('[class*="-EditorToggle"');
+          if (previewButton) {
+            previewButton.addEventListener('click', onPreviewButtonClick);
+            observer.disconnect();
+          }
+        });
+      });
+
+      observer.observe(document.querySelector('body'), { subtree: true, childList: true });
     }
   };
 
   const addDocumentationInfo = () => {
-    // NOTE It checks if we are in the page with all trainings
-    if (window.location.href.endsWith('collections/trainings')) {
-      // FIXME This interval is here because the content of the page is not available from the
-      // begining. Check if we could find a way to execute the function when content is ready.
-      const myInterval = setInterval(() => {
-        const sidebarHeader = document.querySelector('[class*="-SidebarHeading"');
+    const sidebarHeader = document.querySelector('[class*="-SidebarHeading"');
 
-        if (sidebarHeader) {
-          clearInterval(myInterval);
+    document.querySelector('.doc-info-element')?.remove();
 
-          // NOTE Add Info about the documentation
-          const documentationUrl = document.createElement('a');
-          documentationUrl.href = `https://docs.google.com/document/d/1dDIEuZrmovezoQisif31Wu5YirBXxIAk4FwH01iihdo/edit?usp=sharing`;
-          documentationUrl.target = '_blank';
-          documentationUrl.append(documentationUrl.href);
-          documentationUrl.style = 'color: #0766d5';
-
-          const docElement = document.createElement('div');
-
-          // eslint-disable-next-line prettier/prettier
-          docElement.style = 'overflow-wrap: break-word; padding: 8px; background-color: #ffff5f; color: #000; border: 2px solid rgb(223, 223, 227); border-radius: 5px';
-          docElement.className = 'info-element';
-
-          docElement.append('Documentation: ');
-          docElement.appendChild(documentationUrl);
-
-          sidebarHeader.insertAdjacentElement('beforebegin', docElement);
-        }
-      }, 2000);
+    if (!sidebarHeader) {
+      return;
     }
+
+    const documentationUrl = document.createElement('a');
+    documentationUrl.href = `https://docs.google.com/document/d/1dDIEuZrmovezoQisif31Wu5YirBXxIAk4FwH01iihdo/edit?usp=sharing`;
+    documentationUrl.target = '_blank';
+    documentationUrl.append(documentationUrl.href);
+    documentationUrl.style = 'color: #0766d5';
+
+    const docElement = document.createElement('div');
+
+    // eslint-disable-next-line prettier/prettier
+    docElement.style = 'overflow-wrap: break-word; padding: 8px; background-color: #ffff5f; color: #000; border: 2px solid rgb(223, 223, 227); border-radius: 5px';
+    docElement.className = 'doc-info-element';
+
+    docElement.append('Documentation: ');
+    docElement.appendChild(documentationUrl);
+
+    sidebarHeader.insertAdjacentElement('beforebegin', docElement);
   };
 
+  window.addEventListener('popstate', addObservers);
   window.addEventListener('popstate', addHelperInfo);
-  window.addEventListener('popstate', attachEventListenerForPreviewButton);
   window.addEventListener('popstate', addDocumentationInfo);
+  addObservers();
+
+  window.addEventListener('popstate', attachEventListenerForPreviewButton);
+  attachEventListenerForPreviewButton();
 
   const onPreviewButtonClick = () => {
-    addHelperInfo();
+    addObservers();
   };
-
-  addHelperInfo();
-  attachEventListenerForPreviewButton();
-  addDocumentationInfo();
 
   // NOTE: This is a div that is added by netlify CMS when it is a preview deploy.
   // We use these preview deployments for every training, so, we need to remove this div
