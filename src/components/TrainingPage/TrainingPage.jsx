@@ -7,6 +7,7 @@ import { SlidePage } from '../SlidePage/SlidePage';
 import { Homepage } from '../Homepage/Homepage';
 
 import { defineCustomElements as deckDeckGoHighlightElement } from '@deckdeckgo/highlight-code/dist/loader';
+import { AvailableTrainings } from '../AvailableTrainings/AvailableTrainings';
 deckDeckGoHighlightElement();
 
 const TrainingPage = (props) => {
@@ -29,15 +30,25 @@ const TrainingPage = (props) => {
       return <SlidePage body={body} />;
     } else if (type === 'homepage') {
       return <Homepage {...data} />;
+    } else if (type === 'availableTrainings') {
+      return <AvailableTrainings {...data} title={title} />;
     } else {
       return <SlidePage body={body} />;
     }
   };
 
+  const shouldDisplayNavigationBar = () => {
+    if (type === 'availableTrainings' || mode !== 'live') {
+      return false;
+    }
+
+    return true;
+  };
+
   return (
     <>
       <Helmet title={title} />
-      {mode === 'live' ? (
+      {shouldDisplayNavigationBar() ? (
         <Paper elevation={4} className="navigation-buttons-container">
           <NavigationButtons
             navigatePrevious={navigatePrevious}

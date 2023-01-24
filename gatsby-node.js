@@ -72,29 +72,40 @@ exports.createPages = async ({ actions, graphql }) => {
   if (trainingToBuild !== 'admin') {
     graphqlFilter = `(filter: {frontmatter: {uniqueName: {eq: "${trainingToBuild}"}}})`;
   } else {
-    // createPage({
-    //   path: '/',
-    //   component: path.resolve(`src/components/NoContent/NoContent.jsx`),
-    // });
+    const availableTrainingsQuery = await graphql(`
+      {
+        allMarkdownRemark(
+          sort: { order: ASC, fields: frontmatter___title }
+          filter: { frontmatter: { isActive: { eq: true } } }
+        ) {
+          edges {
+            node {
+              frontmatter {
+                title
+                uniqueName
+              }
+            }
+          }
+        }
+      }
+    `);
 
-    // FIXME We need to create a new Page type which will create this page
+    const listOfTrainings = availableTrainingsQuery?.data?.allMarkdownRemark?.edges.map((edge) => ({
+      title: edge.node?.frontmatter?.title,
+      url: `https://${edge?.node?.frontmatter?.uniqueName}--aa-trainings.netlify.app`
+    }));
+
     createPage({
       path: '/', // FIXME: Check if slug already exists,
       component: path.resolve(`src/components/TrainingPage/TrainingPage.jsx`),
       context: {
         id: 1,
-        title: 'Home page',
+        title: 'Available Trainings',
+        type: 'availableTrainings',
         prevSlug: '',
         nextSlug: '',
         currentPageIndex: -1,
-        body: `
-<div style="text-align: center">
-
-# Training
-
-This training is de-activated or it has no content - 1
-</div>
-        `,
+        data: { listOfTrainings },
         numOfPages: 0,
         trainingsData: []
       }
@@ -232,7 +243,6 @@ This training is de-activated or it has no content - 2
                         const pagesWithTheSameTitle = _pages.filter(
                           ({ pageTitle }, index) => pageTitle === _page.pageTitle && index < _pageIndex
                         ).length;
-
                         // eslint-disable-next-line prettier/prettier
                         const pageSlug = `/${sectionSlug}/${slugify(_page.pageTitle)}` + (pagesWithTheSameTitle === 0 ? '' : `-${pagesWithTheSameTitle}`);
 
