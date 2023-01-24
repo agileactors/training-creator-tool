@@ -85,8 +85,8 @@ if (typeof window !== 'undefined') {
     // NOTE: If we are in a training editor, we want to display some info about the training
     const location = window.location.href;
     if (location.includes('collections/trainings/entries/') || location.endsWith('/collections/trainings/new')) {
-      const observer = new MutationObserver(function (mutations_list) {
-        mutations_list.forEach(function () {
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach(() => {
           if (document.querySelector('[class*="-ControlContainer"')) {
             addHelperInfo();
             observer.disconnect();
@@ -98,8 +98,8 @@ if (typeof window !== 'undefined') {
     }
 
     if (window.location.href.endsWith('collections/trainings')) {
-      const observer = new MutationObserver(function (mutations_list) {
-        mutations_list.forEach(function () {
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach(() => {
           if (document.querySelector('[class*="-SidebarHeading"')) {
             addDocumentationInfo();
             observer.disconnect();
@@ -115,8 +115,8 @@ if (typeof window !== 'undefined') {
     const location = window.location.href;
 
     if (location.includes('collections/trainings/entries/') || location.endsWith('/collections/trainings/new')) {
-      const observer = new MutationObserver(function (mutations_list) {
-        mutations_list.forEach(function () {
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach(() => {
           const previewButton = document.querySelector('[class*="-EditorToggle"');
           if (previewButton) {
             previewButton.addEventListener('click', onPreviewButtonClick);
