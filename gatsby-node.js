@@ -243,9 +243,8 @@ This training is de-activated or it has no content - 2
                         const pagesWithTheSameTitle = _pages.filter(
                           ({ pageTitle }, index) => pageTitle === _page.pageTitle && index < _pageIndex
                         ).length;
-                        const pageSlug =
-                          `/${sectionSlug}/${slugify(_page.pageTitle)}` +
-                          (pagesWithTheSameTitle === 0 ? '' : `-${pagesWithTheSameTitle}`);
+                        // eslint-disable-next-line prettier/prettier
+                        const pageSlug = `/${sectionSlug}/${slugify(_page.pageTitle)}` + (pagesWithTheSameTitle === 0 ? '' : `-${pagesWithTheSameTitle}`);
 
                         return `- [${_page.pageTitle}](${pageSlug})`;
                       })
