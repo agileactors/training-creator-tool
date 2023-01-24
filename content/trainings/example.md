@@ -15,7 +15,7 @@ sections:
 
           **Bold text**
 
-          *Italic text*
+          *Italic text.*
 
           [test url](www.google.com)
 
