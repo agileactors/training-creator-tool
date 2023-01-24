@@ -24,15 +24,13 @@ const TrainingPage = (props) => {
   } = props.pageContext;
 
   const { navigatePrevious, navigateNext, canGoPrevious, canGoNext } = useKeyboardNavigation(prevSlug, nextSlug);
-
   const renderSlide = () => {
     if (type === 'content') {
       return <SlidePage body={body} />;
     } else if (type === 'homepage') {
       return <Homepage {...data} />;
     } else if (type === 'availableTrainings') {
-      const props = { data, title };
-      return <AvailableTrainings {...props} />;
+      return <AvailableTrainings {...data} title={title} />;
     } else {
       return <SlidePage body={body} />;
     }

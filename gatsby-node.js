@@ -90,16 +90,10 @@ exports.createPages = async ({ actions, graphql }) => {
       }
     `);
 
-    const listOfTrainings = availableTrainingsQuery?.data?.allMarkdownRemark?.edges.reduce(
-      (trainings, nextValue) => [
-        ...trainings,
-        {
-          title: nextValue.node?.frontmatter?.title,
-          url: `https://${nextValue?.node?.frontmatter?.uniqueName}--aa-trainings.netlify.app`
-        }
-      ],
-      []
-    );
+    const listOfTrainings = availableTrainingsQuery?.data?.allMarkdownRemark?.edges.map((edge) => ({
+      title: edge.node?.frontmatter?.title,
+      url: `https://${edge?.node?.frontmatter?.uniqueName}--aa-trainings.netlify.app`
+    }));
 
     createPage({
       path: '/', // FIXME: Check if slug already exists,

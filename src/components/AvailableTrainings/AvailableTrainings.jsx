@@ -3,7 +3,7 @@ import { BottomCornerDesign } from '../../icons/BottomCornerDesign';
 import { Link, Typography } from '@mui/material';
 import { AaShortLogo } from '../../icons/AaShortLogo';
 
-export const AvailableTrainings = ({ title, data }) => {
+export const AvailableTrainings = ({ title, listOfTrainings }) => {
   const mainTitle = title || 'Trainings';
 
   return (
@@ -11,9 +11,9 @@ export const AvailableTrainings = ({ title, data }) => {
       <div className="content-slide">
         <AaShortLogo className="logo" />
         <h1>{mainTitle}</h1>
-        {data.listOfTrainings.length > 0 ? (
+        {listOfTrainings.length > 0 ? (
           <ul>
-            {data.listOfTrainings.map(({ title, url }) => (
+            {listOfTrainings.map(({ title, url }) => (
               <li key={title}>
                 <Link underline="none" rel="noopener" href={url}>
                   {title}
