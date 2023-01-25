@@ -1,6 +1,6 @@
 ---
 uniqueName: test
-title: Test
+title: Test.
 isActive: true
 sections:
   - sectionTitle: Section 1
