@@ -1,4 +1,4 @@
 ---
 uniqueName: test6
-title: test
+title: test 6
 ---
