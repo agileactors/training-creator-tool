@@ -60,7 +60,7 @@ eval " npm run build"
 export NETLIFY_SITE_ID="$NETLIFY_SITE_ID"
 export NETLIFY_AUTH_TOKEN="$NETLIFY_AUTH_TOKEN"
 
-COMMAND="$NETLIFY_CLI deploy --dir=$BUILD_DIRECTORY --functions=$FUNCTIONS_DIRECTORY --message=\"$INPUT_NETLIFY_DEPLOY_MESSAGE\""
+COMMAND="$NETLIFY_CLI deploy --dir=$BUILD_DIRECTORY --functions=$FUNCTIONS_DIRECTORY --message=\"Admin Deploy\""
 
 COMMAND+=" --prod"
 # COMMAND+=" --alias admin"
@@ -97,7 +97,7 @@ for trainingToBuild in "${arr[@]}"; do
 	export NETLIFY_SITE_ID="$NETLIFY_SITE_ID"
 	export NETLIFY_AUTH_TOKEN="$NETLIFY_AUTH_TOKEN"
 
-	COMMAND="$NETLIFY_CLI deploy --dir=$BUILD_DIRECTORY --functions=$FUNCTIONS_DIRECTORY --message=\"$INPUT_NETLIFY_DEPLOY_MESSAGE\""
+	COMMAND="$NETLIFY_CLI deploy --dir=$BUILD_DIRECTORY --functions=$FUNCTIONS_DIRECTORY --message=\"$trainingToBuild Deploy\""
 
 	COMMAND+=" --alias $trainingToBuild"
 
