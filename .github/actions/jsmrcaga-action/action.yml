@@ -63,6 +63,16 @@ inputs:
     required: false
     default: true
 
+  deleted_alias:
+    description: 'Deployment Subdomain name for deleted trainings'
+    required: false
+    default: ''
+
+  build_deleted_directory:
+    description: 'Directory where built files are stored'
+    required: true
+    default: 'deleted-training'
+
 outputs:
   NETLIFY_OUTPUT:
     description: "netlify command output"
@@ -86,6 +96,8 @@ runs:
     - ${{ inputs.build_command }}
     - ${{ inputs.deploy_alias }}
     - ${{ inputs.node_version }}
+    - ${{ inputs.deleted_deploy_alias }}
+    - ${{ inputs.build_deleted_directory }}
 
 branding:
   icon: activity

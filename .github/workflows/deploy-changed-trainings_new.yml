@@ -1,0 +1,71 @@
+name: 'Deploy Changed Trainings'
+
+on:
+   push:
+    branches:
+      - "feature/delete-training"
+    paths:
+      - '**/trainings/**.md'
+
+permissions: write-all
+
+jobs:
+  deploy:
+    name: 'Deploy to Netlify.'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v34
+      - name: List all changed files
+        id: list-changed-files
+        run: |
+          files=""
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            dir="$(dirname $file)"
+
+            if [ $dir = "content/trainings" ]
+            then
+              pureFileName="$(basename -s .md $file)"
+
+              files+=$pureFileName
+              files+=","
+            fi
+          done
+
+          echo "---- CHRISTOS MESSAGE: The trainings files are going to be deployed: \"$files\""
+
+          echo ::set-output name=changedFiles::${files}
+      - name: List all deleted files
+        id: list-deleted-files
+        run: |
+          files=""
+          for file in ${{ steps.changed-files.outputs.deleted_files }}; do
+            dir="$(dirname $file)"
+
+            if [ $dir = "content/trainings" ]
+            then
+              pureFileName="$(basename -s .md $file)"
+
+              files+=$pureFileName
+              files+=","
+            fi
+          done
+
+          echo "---- CHRISTOS MESSAGE: The deleted trainings files are going to be deployed: \"$files\""
+
+          echo ::set-output name=deletedFiles::${files}
+      - uses: ./.github/actions/jsmrcaga-action
+        with:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          install_command: npm install
+          build_directory: public
+          build_deleted_directory: deleted-training
+          deploy_alias: ${{ steps.list-changed-files.outputs.changedFiles }}
+          deleted_deploy_alias: ${{ steps.list-deleted-files.outputs.deletedFiles }}
+          # FIXME use node version 18
+          node_version: 14
