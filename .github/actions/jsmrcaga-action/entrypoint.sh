@@ -57,6 +57,8 @@ for trainingToBuild in "${arr[@]}"; do
 	echo "---- CHRISTOS MESSAGE: Directory: \"$BUILD_DIRECTORY\""
 done
 
+echo "111 ---- CHRISTOS MESSAGE: Deleted Directory: \"$BUILD_DELETED_DIRECTORY\""
+
 string="$DELETED_DEPLOY_ALIAS"
 
 # Syntax to replace all occurrences of "anime" with " "
