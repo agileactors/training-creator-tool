@@ -65,7 +65,7 @@ sections:
         body: |-
           # Sandbox as iframe
 
-          It may not work in preview mode.
+          It may not work in preview mode
 
           [Example 1](codesandbox-embed://example_1)
       - pageTitle: Sandbox as url
