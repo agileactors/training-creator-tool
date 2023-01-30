@@ -59,7 +59,8 @@ jobs:
           echo ::set-output name=deletedFiles::${files}
 
           files=""
-          for file in ${{ steps.changed-files.outputs.all_old_new_renamed_files[0] }}; do
+          for changedFile in ${{ steps.changed-files.outputs.all_old_new_renamed_files }}; do
+            file=(${changedFile//","/ })[1]
             echo "$file"
           done
 
