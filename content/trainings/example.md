@@ -9,7 +9,7 @@ sections:
       - pageTitle: Text style
         isActive: true
         body: |-
-          # Header 1.
+          # Header 1
 
           ## Header 2
 

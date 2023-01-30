@@ -91,7 +91,7 @@ if (fs.existsSync(allSandboxesFolder)) {
       return console.log('---- CHRISTOS MESSAGE: error occurred in deleting directory', err);
     }
 
-    console.log('---- CHRISTOS MESSAGE: Directory deleted successfully.');
+    console.log('---- CHRISTOS MESSAGE: Directory deleted successfully');
     unzipFiles();
   });
 } else {

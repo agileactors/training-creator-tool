@@ -39,6 +39,7 @@ jobs:
           done
 
           echo "---- CHRISTOS MESSAGE: The trainings files are going to be deployed: \"$files\""
+          echo ::set-output name=changedFiles::${files}
 
           files=""
           for file in ${{ steps.changed-files.outputs.deleted_files }}; do
@@ -54,8 +55,6 @@ jobs:
           done
 
           echo "---- CHRISTOS MESSAGE: The deleted trainings files are going to be deployed: \"$files\""
-
-          echo ::set-output name=changedFiles::${files}
           echo ::set-output name=deletedFiles::${files}
       - uses: ./.github/actions/jsmrcaga-action
         with:
