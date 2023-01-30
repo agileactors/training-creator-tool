@@ -49,16 +49,20 @@ jobs:
             files+=","
           done
 
-          echo "---- CHRISTOS MESSAGE: The deleted trainings files are going to be deployed: \"$files\""
-          echo ::set-output name=deletedFiles::${files}
-
-          files=""
           for changedFile in ${{ steps.changed-files.outputs.all_old_new_renamed_files }}; do
             fileNames=(${changedFile//","/ })
-            newFileName=${fileNames[1]}
+            file=${fileNames[1]}
 
-            echo "$newFileName"
+            dir="$(dirname $file)"
+
+            pureFileName="$(basename -s .md $file)"
+
+            files+=$pureFileName
+            files+=","
           done
+
+          echo "---- CHRISTOS MESSAGE: The deleted trainings files are going to be deployed: \"$files\""
+          echo ::set-output name=deletedFiles::${files}
 
       - uses: ./.github/actions/jsmrcaga-action
         with:
