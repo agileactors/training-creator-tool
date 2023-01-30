@@ -30,13 +30,10 @@ jobs:
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             dir="$(dirname $file)"
 
-            if [ $dir = "content/trainings" ]
-            then
-              pureFileName="$(basename -s .md $file)"
+            pureFileName="$(basename -s .md $file)"
 
-              files+=$pureFileName
-              files+=","
-            fi
+            files+=$pureFileName
+            files+=","
           done
 
           echo "---- CHRISTOS MESSAGE: The trainings files are going to be deployed: \"$files\""
@@ -46,13 +43,10 @@ jobs:
           for file in ${{ steps.changed-files.outputs.deleted_files }}; do
             dir="$(dirname $file)"
 
-            if [ $dir = "content/trainings" ]
-            then
-              pureFileName="$(basename -s .md $file)"
+            pureFileName="$(basename -s .md $file)"
 
-              files+=$pureFileName
-              files+=","
-            fi
+            files+=$pureFileName
+            files+=","
           done
 
           echo "---- CHRISTOS MESSAGE: The deleted trainings files are going to be deployed: \"$files\""
@@ -60,8 +54,10 @@ jobs:
 
           files=""
           for changedFile in ${{ steps.changed-files.outputs.all_old_new_renamed_files }}; do
-            file=(${changedFile//","/ })[1]
-            echo "$file"
+            fileNames=(${changedFile//","/ })
+            newFileName=${fileNames[1]}
+
+            echo "$newFileName"
           done
 
       - uses: ./.github/actions/jsmrcaga-action
