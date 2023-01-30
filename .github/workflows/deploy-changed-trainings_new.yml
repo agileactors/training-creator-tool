@@ -49,6 +49,9 @@ jobs:
             files+=","
           done
 
+          echo "-----",
+          echo "${steps.changed-files.outputs.all_old_new_renamed_file}"
+
           for changedFile in ${{ steps.changed-files.outputs.all_old_new_renamed_files }}; do
             fileNames=(${changedFile//","/ })
             file=${fileNames[1]}
