@@ -12,4 +12,7 @@ sections:
           # What is Coaching
 
           content.
+      - pageTitle: Page 2
+        isActive: true
+        body: Some content
 ---
