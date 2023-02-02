@@ -40,11 +40,12 @@ const TrainingPreview = ({ entry }) => {
           const pageTitle = pageTitleElementClicked.value;
 
           // eslint-disable-next-line prettier/prettier
-          const sectionTitle = listElementClicked.parentElement.parentElement.parentElement.parentElement.querySelector('[id^="sectionTitle-field-"]').value;
+          const sectionTitle = listElementClicked.parentElement.parentElement.parentElement.parentElement.querySelector('[id^="sectionTitle-field-"]')?.value;
 
           for (let i = 0; i < allPages.length; i++) {
             if (allPages[i].title === pageTitle && allPages[i].sectionTitle === sectionTitle) {
               setCurrentPage(i);
+              break;
             }
           }
         }
