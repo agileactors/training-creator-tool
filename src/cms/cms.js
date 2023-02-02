@@ -31,19 +31,22 @@ const TrainingPreview = ({ entry }) => {
     const editorEl = document.querySelector('.Pane1');
 
     const onEditorClick = (evt) => {
-      const allPages = [];
-
-      editorEl.querySelectorAll('[id^="pageTitle-field-"]').forEach((el) => allPages.push(el.id));
-
       const listElementClicked = evt.target.closest('[class*="ListItem"]');
 
       if (listElementClicked) {
         const pageTitleElementClicked = listElementClicked.querySelector('[id^="pageTitle-field-"]');
 
         if (pageTitleElementClicked) {
-          const pageIndex = allPages.indexOf(pageTitleElementClicked.id);
+          const pageTitle = pageTitleElementClicked.value;
 
-          setCurrentPage(pageIndex + 1); // NOTE the +1 is because of the first page that is created automatically
+          // eslint-disable-next-line prettier/prettier
+          const sectionTitle = listElementClicked.parentElement.parentElement.parentElement.parentElement.querySelector('[id^="sectionTitle-field-"]').value;
+
+          for (let i = 0; i < allPages.length; i++) {
+            if (allPages[i].title === pageTitle && allPages[i].sectionTitle === sectionTitle) {
+              setCurrentPage(i);
+            }
+          }
         }
       }
     };
@@ -80,7 +83,8 @@ const TrainingPreview = ({ entry }) => {
         allPages.push({
           ...p,
           title: p.pageTitle,
-          isActive: p.isActive && s.isActive && training.isActive
+          isActive: p.isActive && s.isActive && training.isActive,
+          sectionTitle: s.sectionTitle
         });
 
         return {
