@@ -1,4 +1,0 @@
----
-uniqueName: demo
-title: Demo
----
