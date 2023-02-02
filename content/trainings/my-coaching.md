@@ -11,5 +11,5 @@ sections:
         body: |-
           # What is Coaching
 
-          content
+          content.
 ---
