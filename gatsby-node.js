@@ -7,6 +7,7 @@ const slugify = require('./build-utils/slugify/slugify');
 const getSandboxUrl = (id) => `https://codesandbox.io/s/${id}`;
 
 exports.onCreateNode = async ({ node, actions, getNode }) => {
+  // FIXME: Add try-catch where needed
   const { createNodeField } = actions;
   fmImagesToRelative(node); // convert image paths for gatsby images.
 
