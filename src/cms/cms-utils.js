@@ -1,6 +1,16 @@
 // FIXME In this file many bad practices have been used. We should revisit it.
 
 if (typeof window !== 'undefined') {
+  let HelperInfoObserver;
+  let DocumentationObserver;
+  let WorkflowObserver;
+
+  let TRAINING = '';
+
+  if (window.location.origin.includes('--aa-trainings.netlify.app')) {
+    TRAINING = window.location.origin.split('--aa-trainings.netlify.app')[0].split(window.location.protocol + '//')[1];
+  }
+
   const style = document.createElement('style');
 
   style.innerHTML = /* css */ `
@@ -10,10 +20,22 @@ if (typeof window !== 'undefined') {
     }
   `;
 
+  if (TRAINING) {
+    style.innerHTML += /* css */ `
+      [class*="-WorkflowList"] [draggable="true"] {
+        display: none !important;
+      }
+
+      [class*="-columnHovered1"] [draggable="true"] {
+        display: none !important;
+      }
+    `;
+  }
+
   document.head.appendChild(style);
 
   const addHelperInfo = () => {
-    const editor = document.querySelector('[class*="-ControlContainer"');
+    const editor = document.querySelector('[class*="-ControlContainer"]');
 
     if (!editor) {
       return;
@@ -82,32 +104,42 @@ if (typeof window !== 'undefined') {
   };
 
   const addObservers = () => {
+    HelperInfoObserver?.disconnect();
+    DocumentationObserver?.disconnect();
+    WorkflowObserver?.disconnect();
+
     // NOTE: If we are in a training editor, we want to display some info about the training
     const location = window.location.href;
     if (location.includes('collections/trainings/entries/') || location.endsWith('/collections/trainings/new')) {
-      const observer = new MutationObserver((mutations) => {
-        mutations.forEach(() => {
-          if (document.querySelector('[class*="-ControlContainer"')) {
-            addHelperInfo();
-            observer.disconnect();
-          }
-        });
+      HelperInfoObserver = new MutationObserver(() => {
+        if (document.querySelector('[class*="-ControlContainer"]')) {
+          addHelperInfo();
+          HelperInfoObserver.disconnect();
+        }
       });
 
-      observer.observe(document.querySelector('body'), { subtree: true, childList: true });
+      HelperInfoObserver.observe(document.querySelector('body'), { subtree: true, childList: true });
     }
 
     if (window.location.href.endsWith('collections/trainings')) {
-      const observer = new MutationObserver((mutations) => {
-        mutations.forEach(() => {
-          if (document.querySelector('[class*="-SidebarHeading"')) {
-            addDocumentationInfo();
-            observer.disconnect();
-          }
-        });
+      DocumentationObserver = new MutationObserver(() => {
+        if (document.querySelector('[class*="-SidebarHeading"]')) {
+          addDocumentationInfo();
+          DocumentationObserver.disconnect();
+        }
       });
 
-      observer.observe(document.querySelector('body'), { subtree: true, childList: true });
+      DocumentationObserver.observe(document.querySelector('body'), { subtree: true, childList: true });
+    }
+
+    if (window.location.href.endsWith('/admin/#/workflow')) {
+      WorkflowObserver = new MutationObserver(() => {
+        if (document.querySelector('[class*="WorkflowListContainer"]')) {
+          filterEntriesInWorkflow();
+        }
+      });
+
+      WorkflowObserver.observe(document.querySelector('body'), { subtree: true, childList: true });
     }
   };
 
@@ -117,7 +149,7 @@ if (typeof window !== 'undefined') {
     if (location.includes('collections/trainings/entries/') || location.endsWith('/collections/trainings/new')) {
       const observer = new MutationObserver((mutations) => {
         mutations.forEach(() => {
-          const previewButton = document.querySelector('[class*="-EditorToggle"');
+          const previewButton = document.querySelector('[class*="-EditorToggle"]');
           if (previewButton) {
             previewButton.addEventListener('click', onPreviewButtonClick);
             observer.disconnect();
@@ -130,7 +162,7 @@ if (typeof window !== 'undefined') {
   };
 
   const addDocumentationInfo = () => {
-    const sidebarHeader = document.querySelector('[class*="-SidebarHeading"');
+    const sidebarHeader = document.querySelector('[class*="-SidebarHeading"]');
 
     document.querySelector('.doc-info-element')?.remove();
 
@@ -156,9 +188,28 @@ if (typeof window !== 'undefined') {
     sidebarHeader.insertAdjacentElement('beforebegin', docElement);
   };
 
+  const filterEntriesInWorkflow = () => {
+    const workflowListElement = document.querySelector('[class*="WorkflowListContainer"]');
+
+    if (!workflowListElement) {
+      return;
+    }
+
+    if (TRAINING) {
+      workflowListElement.querySelectorAll('a').forEach((cardLink) => {
+        const trainingInCard = cardLink.querySelector('h2')?.textContent;
+
+        if (TRAINING === trainingInCard) {
+          cardLink.parentElement.parentElement.setAttribute('style', 'display:block !important');
+        }
+      });
+    }
+  };
+
   window.addEventListener('popstate', addObservers);
   window.addEventListener('popstate', addHelperInfo);
   window.addEventListener('popstate', addDocumentationInfo);
+  window.addEventListener('popstate', filterEntriesInWorkflow);
   addObservers();
 
   window.addEventListener('popstate', attachEventListenerForPreviewButton);
