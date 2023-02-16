@@ -77,7 +77,15 @@ sections:
 
           [Example 1](codesandbox-link://example_1)
 
+          [Example 1](codesandbox-link://example_1)
+
           ```javascript
           [Example 1](codesandbox-link://example_1)
           ```
+
+          ```
+          [Example 1](codesandbox-link://example_1)
+          ```
+
+          `[Example 1](codesandbox-link://example_1)`
 ---
