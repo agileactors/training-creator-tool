@@ -76,4 +76,8 @@ sections:
           It may not work in preview mode
 
           [Example 1](codesandbox-link://example_1)
+
+          ```javascript
+          [Example 1](codesandbox-link://example_1)
+          ```
 ---
