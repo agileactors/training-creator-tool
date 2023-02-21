@@ -76,4 +76,14 @@ sections:
           It may not work in preview mode
 
           [Example 1](codesandbox-link://example_1)
+  - sectionTitle: Enrich RTE Test
+    isActive: true
+    pages:
+      - pageTitle: Image with dimentions
+        isActive: true
+        body: >-
+          # This is a custom image element
+
+
+          <img src="/img/example/value.png" alt="custom image alt text" title="custom image title text" style="width: 100pxheight: 30px">
 ---
