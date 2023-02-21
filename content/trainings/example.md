@@ -85,5 +85,7 @@ sections:
           # This is a custom image element
 
 
-          <img src="/img/example/value.png" alt="custom image alt text" title="custom image title text" style="width: 100pxheight: 30px">
+
+
+          <img src="/img/example/value.png" alt="test alt text" title="test title" style=" width: 100px; height: 200px;">
 ---
