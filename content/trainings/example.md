@@ -85,5 +85,5 @@ sections:
           # This is a custom image element
 
 
-          <img src="/img/example/value.png" alt="test alt text" title="test title" style="width: @#$; height: unset;">
+          <div style="text-align: center;"><img src="" alt="" title="" style="width: unset; height: unset;"></div>
 ---
