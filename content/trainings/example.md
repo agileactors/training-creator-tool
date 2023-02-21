@@ -85,5 +85,5 @@ sections:
           # This is a custom image element
 
 
-          <div style="text-align: center;"><img src="" alt="" title="" style="width: unset; height: unset;"></div>
+          <div style="text-align: right;"><img src="/img/example/value.png" alt="hggv" title="" style="width: 50%; height: unset;"></div>
 ---
