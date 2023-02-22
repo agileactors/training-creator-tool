@@ -92,5 +92,5 @@ sections:
           # Two Columns Page
 
 
-          <div data-two-columns-container style="display: flex; gap: 1rem"><div data-left-column-container style="width: 50%; min-width: 50%; max-width: 50%;"><p><strong>Left Column</strong></p></div><div data-right-column-container><p>Right Column</p></div></div>
+          <div data-two-columns-container style="display: flex; gap: 1rem"><div data-left-column-container style="width: 50%; min-width: 50%; max-width: 50%;"><p><strong>kjnkjn</strong></p></div><div data-right-column-container><p>kjnjnmn</p></div></div>
 ---
