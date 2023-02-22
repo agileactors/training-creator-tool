@@ -92,9 +92,7 @@ sections:
           # Two Columns Page
 
 
-          <div data-two-columns-container style="display: flex; gap: 1rem"><div data-left-column-container style="width: 55%"><p><strong>Left Column</strong></p></div><div data-right-column-container><p>Right Column</p>
+          <div data-two-columns-container style="display: flex; gap: 1rem"><div data-left-column-container style="width: 50%; min-width: 50%; max-width: 50%;"><p><strong>Left Column</strong></p></div><div data-right-column-container><h2>Right Column</h2>
 
-          <div data-two-columns-container="" style="display:flex;gap:1rem"><div data-left-column-container="" style="width:50%"><p>Inner Left column</p></div><div data-right-column-container=""><p>Inner Right Column</p>
-
-          <div style="text-align:center"><img src="/img/example/value.png" alt="" title="" style="width:40%;height:unset"/></div></div></div></div></div>
+          <div data-two-columns-container="" style="display:flex;gap:1rem"><div data-left-column-container="" style="width:50%;min-width:50%;max-width:50%"><p>Inner Left Column</p></div><div data-right-column-container=""><p>Inner Right Column with image</p></div></div></div></div>
 ---
