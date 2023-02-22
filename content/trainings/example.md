@@ -88,11 +88,5 @@ sections:
           <div style="text-align: right;"><img src="/img/example/value.png" alt="hggv" title="" style="width: 50%; height: unset;"></div>
       - pageTitle: Two Columns Page
         isActive: true
-        body: >-
-          # Two Columns Page
-
-
-          <div data-two-columns-container style="display: flex; gap: 1rem"><div data-left-column-container style="width: 50%; min-width: 50%; max-width: 50%;"><p><strong>Left Column</strong></p></div><div data-right-column-container><h2>Right Column</h2>
-
-          <div data-two-columns-container="" style="display:flex;gap:1rem"><div data-left-column-container="" style="width:50%;min-width:50%;max-width:50%"><p>Inner Left Column</p></div><div data-right-column-container=""><p>Inner Right Column with image</p></div></div></div></div>
+        body: "# Two Columns Page"
 ---
