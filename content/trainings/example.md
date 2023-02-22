@@ -88,7 +88,8 @@ sections:
           <div style="text-align: right;"><img src="/img/example/value.png" alt="hggv" title="" style="width: 50%; height: unset;"></div>
       - pageTitle: Two Columns Page
         isActive: true
-        body: <div data-two-columns-container><div data-left-column-container>**First
-          column in bold**</div><div data-right-column-container>## Second
-          Column as Header2</div></div>
+        body: <div data-two-columns-container><div
+          data-left-column-container><p><strong>Left
+          Column</strong></p></div><div data-right-column-container><h2>Right
+          Column</h2></div></div>
 ---
