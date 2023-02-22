@@ -88,5 +88,9 @@ sections:
           <div style="text-align: right;"><img src="/img/example/value.png" alt="hggv" title="" style="width: 50%; height: unset;"></div>
       - pageTitle: Two Columns Page
         isActive: true
-        body: "# Two Columns Page"
+        body: >-
+          # Two Columns Page
+
+
+          <div data-two-columns-container style="display: flex; gap: 1rem"><div data-left-column-container style="width: 50%; min-width: 50%; max-width: 50%;"><p><strong>Left Column</strong></p></div><div data-right-column-container><p>Right Column</p></div></div>
 ---
