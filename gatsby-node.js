@@ -11,13 +11,12 @@ exports.onCreateNode = async ({ node, actions, getNode }) => {
   fmImagesToRelative(node); // convert image paths for gatsby images.
 
   const sandboxLinks = node?.context?.body
-    ?.replace(/```.*?\n(.*\n)*?```/g, '')
-    ?.replace(/`.*?\n(.*\n)*?`/g, '')
+    ?.replace(/``[^`]*``/g, '')
+    ?.replace(/`[^`]*`/g, '')
     ?.match(/\[.*\]\(.*codesandbox-link:\/\/.*\)/g);
 
   try {
     if (sandboxLinks) {
-      console.log({ sandboxLinks });
       sandboxLinks.forEach(async (l) => {
         let sandboxPath = l.split('codesandbox-link://')?.[1]?.replace(')', '');
 
@@ -38,8 +37,8 @@ exports.onCreateNode = async ({ node, actions, getNode }) => {
   }
 
   const sandboxIFrames = node?.context?.body
-    ?.replace(/```.*?\n(.*\n)*?```/g, '')
-    ?.replace(/`.*?\n(.*\n)*?`/g, '')
+    ?.replace(/``[^`]*``/g, '')
+    ?.replace(/`[^`]*`/g, '')
     ?.match(/\[?.*\]\(?.*codesandbox-embed:\/\/?.*\)/g);
 
   try {
