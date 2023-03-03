@@ -8302,7 +8302,7 @@ sections:
           <blockquote className="hint">
               A non-empty call stack may be the reason for the extra delay.
           </blockquote>
-      - pageTitle: Micro-tasks vs micro-tasks
+      - pageTitle: Micro-tasks vs macro-tasks
         isActive: true
         body: >-
           
