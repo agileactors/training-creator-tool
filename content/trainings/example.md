@@ -76,7 +76,7 @@ sections:
           It may not work in preview mode
 
           [Example 1](codesandbox-link://example_1)
-  - sectionTitle: Enrich RTE Test
+  - sectionTitle: Enrich RTE Test1
     isActive: true
     pages:
       - pageTitle: Image with dimentions
