@@ -405,4 +405,211 @@ sections:
           ```js
           $ npm uninstall express
           ```
+  - sectionTitle: File System
+    isActive: true
+    pages:
+      - pageTitle: FS Module
+        isActive: true
+        body: >-
+          In Node.js, the **fs** module is included for accessing the physical
+          file system. This module is responsible for handling all asynchronous
+          or synchronous file I/O operations.<br><br>
+
+
+          Now, let's take a look at some common examples of I/O operations using the fs module.
+      - pageTitle: Reading Files
+        isActive: true
+        body: >
+          Use the **fs.readFile()** method to read the physical file
+          asynchronously.
+
+
+          ```js
+
+          fs.readFile(fileName [,options], callback)
+
+          ```
+
+          <br>
+
+
+          Parameter Description:
+
+
+          - **filename**: Full path and name of the file as a string.
+
+          - **options**: The options parameter can be an object or string which can include encoding and flag.
+
+          - **callback**: This will get called when readFile operation completes.
+      - pageTitle: Reading Files - Example
+        isActive: true
+        body: >
+          The following example demonstrates reading existing **text-file.txt**
+          asynchronously.
+
+
+          ```js
+
+          const fs = require('fs');
+
+
+          fs.readFile('text-file.txt', function (err, data) {
+            if (err) {
+              console.error(err);
+              process.exit(1);
+            }
+            console.log(data);
+          });
+
+          ```
+
+
+          The above example reads the text file asynchronously and executes the callback function when the read operation completes. This read operation either terminates the process on error or completes it successfully.
+      - pageTitle: Reading Files Synchronously
+        isActive: true
+        body: >-
+          Use the **fs.readFileSync()** method to read the file synchronously,
+          as shown below.<br><br>
+
+
+          ```js
+
+          const fs = require('fs');
+
+
+          const data = fs.readFileSync('file.txt', 'utf8');
+
+          console.log(data);
+
+          ```
+      - pageTitle: Writing Files
+        isActive: true
+        body: >-
+          To write data to a file using the fs module, utilize the
+          **fs.writeFile()** method. This method will overwrite the existing
+          content if the file already exists, or create a new file and write
+          data to it if it does not exist.
+
+
+          ```js
+
+          fs.writeFile(filename, data[, options], callback)
+
+          ```
+
+          <br>
+
+
+          Parameter Description:
+
+          - **filename**: Full path and name of the file as a string.
+
+          - **data**: The content to be written in a file.
+
+          - **options**: The options parameter can be an object or string which can include encoding, mode, and flag.
+
+          - **callback**: This will get called when the write operation completes.
+      - pageTitle: Writing Files - Example
+        isActive: true
+        body: >-
+          The following example creates a new file called test.txt and writes
+          **"Hello World"** into it asynchronously.
+
+
+          ```js
+
+          const fs = require('fs');
+
+
+          fs.writeFile('test.txt', 'Hello World!', (err) => { 
+            if (err) {
+              console.log(err);
+              return;
+            }
+            console.log('Write operation completed.');
+          });
+
+          ```
+
+
+          In the same way, use the **fs.appendFile()** method to append the content to an existing file.
+
+
+          ```js
+
+          fs.appendFile('test.txt', 'Hello World!', (err) => { 
+            if (err) {
+              console.log(err);
+              return;
+            }
+            console.log('Append operation completed.');
+          });
+
+          ```
+      - pageTitle: Opening Files
+        isActive: true
+        body: >-
+          You can open a file for reading or writing using the **fs.open()**
+          method.
+
+
+          ```js
+
+          fs.open(path, flags[, mode], callback)
+
+          ```
+
+          <br>
+
+
+          Parameter Description:
+
+          - **path**: Full path with the name of the file as a string.
+
+          - **flags**: The flag to perform the operation.
+
+          - **mode**: The mode for read, write or read/write.
+
+          - **callback**: This will get called when file open operation completes.
+      - pageTitle: Flags
+        isActive: true
+        body: >-
+          The following table lists all the flags which can be used in
+          read/write operations:
+
+          <br><br>
+
+
+          **r**, **r+**, **rs**, **rs+**, **w**, **wx**, **w+**, **wx+**, **a**, **ax**, **a+**, **ax+**
+      - pageTitle: Deleting Files
+        isActive: true
+        body: >-
+          Use the **fs.unlink()** method to delete an existing file.
+
+
+          ```js
+
+          fs.unlink(path, callback);
+
+          ```
+
+
+          The following example deletes an existing file.
+
+
+          ```js
+
+          const fs = require('fs');
+
+
+          fs.unlink('test.txt', () => {
+            console.log('File deleted successfully.');
+          });
+
+          ```
+
+          <br>
+
+
+          You can find all the available methods here: https://nodejs.org/api/fs.html
 ---
