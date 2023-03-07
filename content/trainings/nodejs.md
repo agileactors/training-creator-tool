@@ -165,4 +165,244 @@ sections:
           to the global scope. In the browser's JavaScript, variables declared
           without the **var** keyword become global. In Node.js, everything
           becomes local by default.
+  - sectionTitle: Modules
+    isActive: true
+    pages:
+      - pageTitle: CommonJS
+        isActive: true
+        body: >+
+          In Node.js, a module is a unit of functionality that can be either
+          simple or complex and is organized into one or multiple JavaScript
+          files. These modules can be reused throughout the Node.js application
+          for greater efficiency and organization.<br><br>
+
+
+          Each module in Node.js has its own context, so it cannot interfere with other modules or pollute the global scope.<br><br>
+
+
+          Node.js implements the [CommonJS modules standard](https://requirejs.org/docs/commonjs.html).
+
+      - pageTitle: Module Types
+        isActive: true
+        body: |-
+          The types of modules included in Node.js are as follows:
+
+          - Core Modules
+          - Local Modules
+          - Third-Party Modules (NPM)
+      - pageTitle: Core Modules
+        isActive: true
+        body: >-
+          Node.js is a lightweight framework. The core modules include the bare
+          minimum functionalities of Node.js. These core modules are compiled
+          into their binary distribution and load automatically when the Node.js
+          process starts. However, you need to import the core module first in
+          order to use it in your application.<br><br>
+
+
+          Most used core modules: **http**, **url**, **path**, **fs**, **util**.
+      - pageTitle: Loading Core Modules
+        isActive: true
+        body: >+
+          In order to use any Node.js module, you first need to import it using
+          the **require** function as shown below.<br><br>
+
+
+          ```js
+
+          const module = require('module_name');
+
+          ```
+
+      - pageTitle: Writing Simple Module
+        isActive: true
+        body: >+
+          Let's write a simple logging module that logs the information,
+          warning, or error to the console.<br><br>
+
+
+          ```js
+
+          const log = {
+            info: function(message) {
+              console.log(`Info: ${message}`);
+            },
+            warn: function(message) {
+              console.log(`Warning: ${message}`);
+            },
+            error: function(message) {
+              console.error(`Error: ${message}`);
+            },
+          };
+
+
+          module.exports = log;
+
+          ```
+
+      - pageTitle: Module Exports
+        isActive: true
+        body: By default, every JavaScript file in a Node.js application contains a
+          special object called **module.exports**. You can utilize this object,
+          or its alias **exports**, to expose a function, object, or variable as
+          a module in Node.js.
+      - pageTitle: Loading Local Modules
+        isActive: true
+        body: >-
+          In order to utilize local modules within your application, you must
+          employ the **require()** function, similar to how you would for a core
+          module. However, it's necessary to explicitly indicate the path to the
+          JavaScript file for the module.<br><br>
+
+
+          ```js
+
+          const logger = require('./log.js');
+
+
+          logger.info('Node.js rocks!!');
+
+          ```
+      - pageTitle: Export Literals
+        isActive: true
+        body: >-
+          As previously stated, **exports** is an object that exposes whatever
+          is assigned to it as a module. For instance, if you assign a string
+          literal to it, the string literal will be exposed as a module.<br><br>
+
+
+          ```js
+
+          // message.js
+
+          module.exports = 'Hello world';
+
+          ```
+
+
+          ```js
+
+          // main.js
+
+          const msg = require('./message.js');
+
+
+          console.log(msg);
+
+          ```
+      - pageTitle: Export Objects
+        isActive: true
+        body: >-
+          As an object, **exports** can have properties or methods attached to
+          it. For instance, the code snippet below exposes an object with a
+          string property in the **message.js** file:<br><br>
+
+
+          ```js
+
+          exports.SimpleMessage = 'Hello world';
+
+          ```
+
+
+          ```js
+
+          const msg = require('./messages.js');
+
+
+          console.log(msg.SimpleMessage);
+
+          ```
+      - pageTitle: Export Functions
+        isActive: true
+        body: >-
+          You can attach an anonymous function to the exports object as shown
+          below.
+
+
+          ```js
+
+          module.exports = function(msg) { 
+            console.log(msg);
+          };
+
+          ```
+
+
+          Now, you can use the above module, as shown below.
+
+
+          ```js
+
+          const msg = require('./log.js');
+
+
+          msg('Hello World');
+
+          ```
+  - sectionTitle: NPM
+    isActive: true
+    pages:
+      - pageTitle: Node Package Manager
+        isActive: true
+        body: >-
+          Node Package Manager (NPM) is a command line tool that allows you to
+          install, update, or uninstall Node.js packages within your
+          application. In addition to this, it also serves as an online
+          repository for open-source Node.js packages. The global node community
+          contributes useful modules and publishes them as packages in this
+          repository for others to use.<br><br>
+
+
+          Official website: https://www.npmjs.com
+      - pageTitle: Install Package Locally
+        isActive: true
+        body: >
+          Use the following command to install any third-party module in your
+          local Node.js project folder.
+
+
+          ```js
+
+          $ npm install <package_name>
+
+          ```
+
+
+          For example, the following command will install **express.js** into your **cwd**.
+
+
+          ```js
+
+          $ npm install express
+
+          ```
+      - pageTitle: Install Package Globally
+        isActive: true
+        body: >-
+          NPM also has the capability to install packages globally, making them
+          available for use in any Node.js application on the computer. Global
+          packages are installed by NPM into the
+          /Users/(name)/local/lib/node_modules folder.<br><br>
+
+
+          ```js
+
+          $ npm install -g express
+
+          ```
+      - pageTitle: Uninstall Packages
+        isActive: true
+        body: |-
+          Use the following command to remove a local package from your project.
+
+          ```js
+          $ npm uninstall <package_name>
+          ```
+
+          The following command will uninstall express.js from the application.
+
+          ```js
+          $ npm uninstall express
+          ```
 ---
